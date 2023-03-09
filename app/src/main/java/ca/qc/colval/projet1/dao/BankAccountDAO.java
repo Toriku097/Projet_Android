@@ -65,7 +65,7 @@ public class BankAccountDAO implements IBankAccountDAO {
         values.put("acc_num", account.getNoAccount());
         values.put("bank", account.getBank());
 
-        int id = (int) db.insert("BankAccount", null, values);
+        int id = (int) db.insert("BankAccounts", null, values);
         return getBankAccountbyId(id);
     }
 
@@ -77,7 +77,7 @@ public class BankAccountDAO implements IBankAccountDAO {
         values.put("acc_num", account.getNoAccount());
         values.put("bank", account.getBank());
 
-        db.update("acc_num", values, "idcb = ?", new String[]{ id+""});
+        db.update("BankAccounts", values, "idcb = ?", new String[]{ id+""});
         return getBankAccountbyId(id);
     }
 
@@ -86,7 +86,7 @@ public class BankAccountDAO implements IBankAccountDAO {
         BankAccount account = getBankAccountbyId(id);
         if(account != null) {
             SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-            db.delete("BankAccount","id = ?", new String[]{id + ""});
+            db.delete("BankAccount","idcb = ?", new String[]{id + ""});
         }
         return account;
     }
