@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import ca.qc.colval.projet1.R;
 
-public class Compte_Bancaire extends AppCompatActivity {
+public class DeadlineActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compte_bancaire);
+        setContentView(R.layout.activity_echeancier);
     }
 }

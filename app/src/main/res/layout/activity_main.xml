@@ -21,13 +21,14 @@
             android:layout_marginTop="64dp"
             android:text="Ajouter des dépenses aux projet"
             android:textAlignment="center"
-            android:textSize="24sp"
+            android:textSize="24dp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/button1"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:onClick="toExpenseClick"
             android:text="Suivant" />
 
         <TextView
@@ -44,6 +45,7 @@
             android:id="@+id/button2"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:onClick="toAccountClick"
             android:text="Suivant" />
 
         <TextView
@@ -60,6 +62,7 @@
             android:id="@+id/button3"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:onClick="toConventionClick"
             android:text="Suivant" />
 
         <TextView
@@ -76,6 +79,7 @@
             android:id="@+id/button4"
             android:layout_width="200dp"
             android:layout_height="50dp"
+            android:onClick="toDeadlineClick"
             android:text="Suivant"
             android:textSize="16dp" />
     </LinearLayout>

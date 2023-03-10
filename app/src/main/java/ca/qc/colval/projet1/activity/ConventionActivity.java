@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import ca.qc.colval.projet1.R;
 
-public class Convention extends AppCompatActivity {
+public class ConventionActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
