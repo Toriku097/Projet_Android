@@ -12,4 +12,10 @@
         <item>Espèce</item>
         <item>Chèque</item>
     </string-array>
+    <string-array name="Convention">
+        <item>Maconnerie</item>
+        <item>Plomberie</item>
+        <item>Electricite</item>
+        <item>Matériaux de construction</item>
+    </string-array>
 </resources>

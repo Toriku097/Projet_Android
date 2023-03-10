@@ -30,5 +30,6 @@ public class ExpenseActivity extends AppCompatActivity {
     }
 
     public void addExpenseClick(View v){
+        //rajouté la dépense aux tables expense + historic
     }
 }
