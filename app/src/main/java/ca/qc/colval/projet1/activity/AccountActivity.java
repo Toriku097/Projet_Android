@@ -18,6 +18,11 @@ public class AccountActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
+
+        //init
+        lbl_amount = findViewById(R.id.account_lbl_amount);
+        spn_account = findViewById(R.id.account_spn_account);
+        spn_check = findViewById(R.id.account_spn_check);
     }
     public void payCheckClick (View v) {}
 }

@@ -37,7 +37,7 @@
                 android:text="Choisir chèque" />
 
             <Spinner
-                android:id="@+id/account_spn_chech"
+                android:id="@+id/account_spn_check"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
