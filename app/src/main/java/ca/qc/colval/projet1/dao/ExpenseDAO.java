@@ -34,6 +34,7 @@ public class ExpenseDAO implements IExpenseDAO {
                     expense.setPaymentMethod(cursor.getString(3));
                     expense.setBankAccountId(cursor.getInt(4));
                     expense.setSupplierId(cursor.getInt(5));
+                    expense.setProjectId(cursor.getInt(6));
 
                     expenses.add(expense);
                     cursor.moveToNext();
@@ -59,6 +60,7 @@ public class ExpenseDAO implements IExpenseDAO {
                 expense.setPaymentMethod(cursor.getString(3));
                 expense.setBankAccountId(cursor.getInt(4));
                 expense.setSupplierId(cursor.getInt(5));
+                expense.setProjectId(cursor.getInt(6));
 
                 db.close();
                 cursor.close();
@@ -76,6 +78,7 @@ public class ExpenseDAO implements IExpenseDAO {
             values.put("payment_method", expense.getPaymentMethod());
             values.put("idcb", expense.getBankAccountId());
             values.put("idf", expense.getSupplierId());
+            values.put("idp", expense.getProjectId());
 
             int id = (int) db.insert("Expenses", null, values);
             return getExpensebyId(id);
@@ -91,6 +94,7 @@ public class ExpenseDAO implements IExpenseDAO {
             values.put("payment_method", expense.getPaymentMethod());
             values.put("idcb", expense.getBankAccountId());
             values.put("idf", expense.getSupplierId());
+            values.put("idp", expense.getProjectId());
 
             db.update("Expenses", values, "idd = ?", new String[]{ id+""});
             return getExpensebyId(id);

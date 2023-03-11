@@ -7,18 +7,20 @@ public class Expense {
     private String paymentMethod;
     private int bankAccountId;
     private int supplierId;
+    private int projectId;
 
     public Expense() {
 
     }
 
-    public Expense(int expenseId, String expenseType, double amount, String paymentMethod, int bankAccountId, int supplierId) {
+    public Expense(int expenseId, String expenseType, double amount, String paymentMethod, int bankAccountId, int supplierId, int projectId) {
         this.expenseId = expenseId;
         this.expenseType = expenseType;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.bankAccountId = bankAccountId;
         this.supplierId = supplierId;
+        this.projectId = projectId;
     }
 
     public int getExpenseId() {
@@ -67,5 +69,13 @@ public class Expense {
 
     public void setSupplierId(int supplierId) {
         this.supplierId = supplierId;
+    }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
     }
 }
