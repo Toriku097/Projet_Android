@@ -3,14 +3,16 @@ package ca.qc.colval.projet1.entities;
 public class Project {
     private int projectId;
     private String name;
+    private double totalExpenses;
 
     public Project() {
 
     }
 
-    public Project(int projectId, String name) {
+    public Project(int projectId, String name, double totalExpenses) {
         this.projectId = projectId;
         this.name = name;
+        this.totalExpenses = totalExpenses;
     }
 
     public int getProjectId() {
@@ -27,5 +29,13 @@ public class Project {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public double getTotalExpenses() {
+        return totalExpenses;
+    }
+
+    public void setTotalExpenses(double totalExpenses) {
+        this.totalExpenses = totalExpenses;
     }
 }

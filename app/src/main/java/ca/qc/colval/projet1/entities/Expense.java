@@ -8,12 +8,64 @@ public class Expense {
     private int bankAccountId;
     private int supplierId;
 
+    public Expense() {
+
+    }
+
     public Expense(int expenseId, String expenseType, double amount, String paymentMethod, int bankAccountId, int supplierId) {
         this.expenseId = expenseId;
         this.expenseType = expenseType;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
         this.bankAccountId = bankAccountId;
+        this.supplierId = supplierId;
+    }
+
+    public int getExpenseId() {
+        return expenseId;
+    }
+
+    public void setExpenseId(int expenseId) {
+        this.expenseId = expenseId;
+    }
+
+    public String getExpenseType() {
+        return expenseType;
+    }
+
+    public void setExpenseType(String expenseType) {
+        this.expenseType = expenseType;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public int getBankAccountId() {
+        return bankAccountId;
+    }
+
+    public void setBankAccountId(int bankAccountId) {
+        this.bankAccountId = bankAccountId;
+    }
+
+    public int getSupplierId() {
+        return supplierId;
+    }
+
+    public void setSupplierId(int supplierId) {
         this.supplierId = supplierId;
     }
 }

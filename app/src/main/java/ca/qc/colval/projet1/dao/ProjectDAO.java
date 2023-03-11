@@ -30,6 +30,7 @@ public class ProjectDAO implements IProjectDAO{
                 Project project = new Project();
                 project.setProjectId(cursor.getInt(0));
                 project.setName(cursor.getString(1));
+                project.setTotalExpenses(cursor.getDouble(2));
 
                 projects.add(project);
                 cursor.moveToNext();
@@ -51,6 +52,7 @@ public class ProjectDAO implements IProjectDAO{
             Project project = new Project();
             project.setProjectId(cursor.getInt(0));
             project.setName(cursor.getString(1));
+            project.setTotalExpenses(cursor.getDouble(2));
             db.close();
             cursor.close();
             return project;
