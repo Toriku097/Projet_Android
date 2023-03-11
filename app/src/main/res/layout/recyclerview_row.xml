@@ -12,6 +12,12 @@
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
+            android:id="@+id/row_lbl_check"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Numéro de chèque" />
+
+        <TextView
             android:id="@+id/row_lbl_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,5 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Projet" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,7 @@ package ca.qc.colval.projet1.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -23,4 +24,5 @@ public class ConventionActivity extends AppCompatActivity {
         spn_supplier = findViewById(R.id.convention_spn_supplier);
         spn_convention = findViewById(R.id.convention_spn_convention);
     }
+    public void addConventionClick(View v){}
 }
