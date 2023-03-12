@@ -56,16 +56,16 @@ public class ExpenseActivity extends AppCompatActivity {
         //rajouté la dépense aux tables expense (+chèque)
         Expense tempExpense;
         int expenseId = 1;
+        String expenseType = txt_expenseType.getText().toString();
+        Double amount = Double.parseDouble(txt_amount.getText().toString());
+        String payment = spn_paymentMethod.getSelectedItem().toString();
         int[] id = getId();
 
-        if(expenses.isEmpty()==true) {
+        if(expenses.isEmpty()==false) {
+            showToast("has value");
             for (Expense expense : expenses) {
                 if (expense.getExpenseId() == expenseId) {
-                    tempExpense = new Expense(expenseId,
-                            txt_expenseType.getText().toString(),
-                            Double.parseDouble(txt_amount.getText().toString()),
-                            spn_paymentMethod.getSelectedItem().toString(),
-                            id[0], id[1], id[3]);
+                    tempExpense = new Expense(expenseId,expenseType,amount, payment,id[0], id[1], id[2]);
                     expenseDAO.addExpense(tempExpense);
                     expenses.add(tempExpense);
                     showToast("Dépense ajouté");
@@ -74,13 +74,11 @@ public class ExpenseActivity extends AppCompatActivity {
                 expenseId++;
             }
         }else {
-            tempExpense = new Expense(expenseId,
-                    txt_expenseType.getText().toString(),
-                    Double.parseDouble(txt_amount.getText().toString()),
-                    spn_paymentMethod.getSelectedItem().toString(),
-                    id[0], id[1], id[3]);
+            tempExpense = new Expense(expenseId,expenseType,amount, payment,id[0], id[1], id[2]);
             expenseDAO.addExpense(tempExpense);
+            showToast("add to dao");
             expenses.add(tempExpense);
+            showToast("add to list");
             showToast("Dépense ajouté");
         }
     }
