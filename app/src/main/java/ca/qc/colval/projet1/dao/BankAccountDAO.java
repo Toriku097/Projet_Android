@@ -51,7 +51,7 @@ public class BankAccountDAO implements IBankAccountDAO {
             account.setAccountId(cursor.getInt(0));
             account.setNoAccount(cursor.getString(1));
             account.setBank(cursor.getString(2));
-            account.setFunds(cursor.getFloat(3));
+
 
             db.close();
             cursor.close();
@@ -70,7 +70,7 @@ public class BankAccountDAO implements IBankAccountDAO {
             account.setAccountId(cursor.getInt(0));
             account.setNoAccount(cursor.getString(1));
             account.setBank(cursor.getString(2));
-            account.setFunds(cursor.getFloat(3));
+
 
             db.close();
             cursor.close();
@@ -86,7 +86,7 @@ public class BankAccountDAO implements IBankAccountDAO {
         ContentValues values = new ContentValues();
         values.put("acc_num", account.getNoAccount());
         values.put("bank", account.getBank());
-        values.put("funds",account.getFunds());
+
 
         int id = (int) db.insert("BankAccounts", null, values);
         return getBankAccountbyId(id);
@@ -99,7 +99,7 @@ public class BankAccountDAO implements IBankAccountDAO {
         ContentValues values = new ContentValues();
         values.put("acc_num", account.getNoAccount());
         values.put("bank", account.getBank());
-        values.put("funds",account.getFunds());
+
 
         db.update("BankAccounts", values, "idcb = ?", new String[]{ id+""});
         return getBankAccountbyId(id);

@@ -5,8 +5,6 @@ public class BankAccount {
     private String noAccount;
     private String bank;
 
-    private float funds;
-
     public BankAccount() {
 
     }
@@ -15,7 +13,7 @@ public class BankAccount {
         this.accountId = aId;
         this.noAccount = no;
         this.bank = bank;
-        this.funds = funds;
+
     }
 
     public int getAccountId() {
@@ -42,11 +40,5 @@ public class BankAccount {
         this.bank = bank;
     }
 
-    public float getFunds() {
-        return funds;
-    }
 
-    public void setFunds(float funds) {
-        this.funds = funds;
-    }
 }
