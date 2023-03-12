@@ -53,12 +53,12 @@
                 android:layout_marginTop="5dp"
                 android:text="Fournisseur" />
 
-            <EditText
-                android:id="@+id/depense_txt_supplier"
+            <Spinner
+                android:id="@+id/expense_spn_supplier"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName" />
+                android:layout_height="45dp"
+                android:entries="@array/supplier" />
+
         </LinearLayout>
 
         <LinearLayout

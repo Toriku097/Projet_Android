@@ -2,17 +2,29 @@ package ca.qc.colval.projet1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ca.qc.colval.projet1.R;
+import ca.qc.colval.projet1.dao.CheckDAO;
+import ca.qc.colval.projet1.dao.ExpenseDAO;
+import ca.qc.colval.projet1.entities.Expense;
 
 public class ExpenseActivity extends AppCompatActivity {
 
-    TextView txt_supplier,txt_amount,txt_expenseType,txt_date;
-    Spinner spn_project,spn_paymentMethod,spn_Account;
+    TextView txt_amount,txt_expenseType,txt_date;
+    Spinner spn_project,spn_paymentMethod,spn_Account,spn_supplier;
+
+    ExpenseDAO expenseDAO;
+    CheckDAO checkDAO;
+    List<Expense> expenses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +32,18 @@ public class ExpenseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense);
 
         //init
-        txt_supplier = findViewById(R.id.depense_txt_supplier);
+        try {
+            expenses = expenseDAO.getAllExpenses();
+        }
+        catch (java.lang.NullPointerException e){System.out.println(e);}
+        finally {
+            expenses = new ArrayList<>();
+        }
+
+        expenseDAO = new ExpenseDAO(this);
+        checkDAO = new CheckDAO(this);
+
+        spn_supplier = findViewById(R.id.expense_spn_supplier);
         txt_amount = findViewById(R.id.depense_txt_money);
         txt_expenseType = findViewById(R.id.depense_txt_expenseType);
         txt_date = findViewById(R.id.depense_txt_date);
@@ -29,7 +52,51 @@ public class ExpenseActivity extends AppCompatActivity {
         spn_Account = findViewById(R.id.depense_spn_account);
     }
 
-    public void addExpenseClick(View v){
-        //rajouté la dépense aux tables expense + historic
+    public void addExpenseClick(View v) {
+        //rajouté la dépense aux tables expense (+chèque)
+        Expense tempExpense;
+        int expenseId = 1;
+        int[] id = getId();
+
+
+        for (Expense expense : expenses) {
+            if (expense.getExpenseId() == expenseId) {
+                tempExpense = new Expense(expenseId,
+                        txt_expenseType.getText().toString(),
+                        Double.parseDouble(txt_amount.getText().toString()),
+                        spn_paymentMethod.getSelectedItem().toString(),
+                        id[0],id[1],id[3]);
+                expenseDAO.addExpense(tempExpense);
+                showToast("Dépense ajouté");
+                break;
+            }
+            expenseId++;
+        }
     }
+        private int[] getId(){
+            int[] id = new int[3];
+            if (spn_project.getSelectedItem().toString().equals("Les Jardins Mercier"))
+                id[0] = 1;
+            else id[0] = 2;
+
+            if (spn_Account.getSelectedItem().toString().equals("BC1_RBC Scott"))
+                id[1] = 1;
+            else id[1] = 2;
+
+            switch (spn_supplier.getSelectedItem().toString()) {
+                case "Buildmate":id[2]=1;
+                case "Constructronix":id[2]=2;
+                case "SteelScape":id[2]=3;
+                case "Concretopia":id[2]=4;
+                case "LumberLink":id[2]=5;
+                case "PlumbingPro":id[2]=6;
+            }
+
+            return id;
+        }
+        private void showToast(String msg){
+            Context context = getApplicationContext();
+            Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+            toast.show();
+        }
 }
