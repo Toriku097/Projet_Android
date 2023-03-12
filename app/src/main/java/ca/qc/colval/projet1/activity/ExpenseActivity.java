@@ -58,19 +58,30 @@ public class ExpenseActivity extends AppCompatActivity {
         int expenseId = 1;
         int[] id = getId();
 
-
-        for (Expense expense : expenses) {
-            if (expense.getExpenseId() == expenseId) {
-                tempExpense = new Expense(expenseId,
-                        txt_expenseType.getText().toString(),
-                        Double.parseDouble(txt_amount.getText().toString()),
-                        spn_paymentMethod.getSelectedItem().toString(),
-                        id[0],id[1],id[3]);
-                expenseDAO.addExpense(tempExpense);
-                showToast("Dépense ajouté");
-                break;
+        if(expenses.isEmpty()==true) {
+            for (Expense expense : expenses) {
+                if (expense.getExpenseId() == expenseId) {
+                    tempExpense = new Expense(expenseId,
+                            txt_expenseType.getText().toString(),
+                            Double.parseDouble(txt_amount.getText().toString()),
+                            spn_paymentMethod.getSelectedItem().toString(),
+                            id[0], id[1], id[3]);
+                    expenseDAO.addExpense(tempExpense);
+                    expenses.add(tempExpense);
+                    showToast("Dépense ajouté");
+                    break;
+                }
+                expenseId++;
             }
-            expenseId++;
+        }else {
+            tempExpense = new Expense(expenseId,
+                    txt_expenseType.getText().toString(),
+                    Double.parseDouble(txt_amount.getText().toString()),
+                    spn_paymentMethod.getSelectedItem().toString(),
+                    id[0], id[1], id[3]);
+            expenseDAO.addExpense(tempExpense);
+            expenses.add(tempExpense);
+            showToast("Dépense ajouté");
         }
     }
         private int[] getId(){
