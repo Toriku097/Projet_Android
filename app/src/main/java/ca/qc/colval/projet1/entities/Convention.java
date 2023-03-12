@@ -4,8 +4,28 @@ public class Convention {
     private int conventionId;
     private String name;
 
+    public Convention() {
+
+    }
+
     public Convention(int conventionId, String name) {
         this.conventionId = conventionId;
+        this.name = name;
+    }
+
+    public int getConventionId() {
+        return conventionId;
+    }
+
+    public void setConventionId(int conventionId) {
+        this.conventionId = conventionId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
         this.name = name;
     }
 }

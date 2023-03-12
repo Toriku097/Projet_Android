@@ -49,7 +49,7 @@ public class ExpenseDAO implements IExpenseDAO {
         @Override
         public Expense getExpensebyId(int id) {
             SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
-            String request = "SELECT * FROM BankAccounts WHERE idd = " + id;
+            String request = "SELECT * FROM Expenses WHERE idd = " + id;
             Cursor cursor = db.rawQuery(request, null);
             if(cursor != null) {
                 cursor.moveToFirst();
