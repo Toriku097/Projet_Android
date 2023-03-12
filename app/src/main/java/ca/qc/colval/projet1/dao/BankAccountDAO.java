@@ -58,6 +58,24 @@ public class BankAccountDAO implements IBankAccountDAO {
         return null;
     }
 
+    public String getBankAccountNobyId(int id) {
+        SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
+        String request = "SELECT * FROM BankAccounts WHERE idcb = " + id;
+        Cursor cursor = db.rawQuery(request, null);
+        if(cursor != null) {
+            cursor.moveToFirst();
+            BankAccount account = new BankAccount();
+            account.setAccountId(cursor.getInt(0));
+            account.setNoAccount(cursor.getString(1));
+            account.setBank(cursor.getString(2));
+            db.close();
+            cursor.close();
+            return account.getNoAccount();
+        }
+        return null;
+
+    }
+
     @Override
     public BankAccount addBankAccount(BankAccount account) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();

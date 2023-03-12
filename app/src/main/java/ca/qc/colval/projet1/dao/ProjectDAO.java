@@ -60,6 +60,24 @@ public class ProjectDAO implements IProjectDAO{
         return null;
     }
 
+    public String getProjectNamebyId(int id) {
+        SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
+        String request = "SELECT * FROM Projects WHERE idp = " + id;
+        Cursor cursor  = db.rawQuery(request, null);
+        if(cursor != null) {
+            cursor.moveToFirst();
+            Project project = new Project();
+            project.setProjectId(cursor.getInt(0));
+            project.setName(cursor.getString(1));
+            project.setTotalExpenses(cursor.getDouble(2));
+            db.close();
+            cursor.close();
+            return project.getName();
+        }
+        return null;
+    }
+
+
     public Project addProject(Project project) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
