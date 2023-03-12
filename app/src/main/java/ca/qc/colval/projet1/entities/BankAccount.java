@@ -5,14 +5,17 @@ public class BankAccount {
     private String noAccount;
     private String bank;
 
+    private float funds;
+
     public BankAccount() {
 
     }
 
-    public BankAccount(int aId,String no,String bank){
+    public BankAccount(int aId,String no,String bank, float funds){
         this.accountId = aId;
         this.noAccount = no;
         this.bank = bank;
+        this.funds = funds;
     }
 
     public int getAccountId() {
@@ -37,5 +40,13 @@ public class BankAccount {
 
     public void setBank(String bank) {
         this.bank = bank;
+    }
+
+    public float getFunds() {
+        return funds;
+    }
+
+    public void setFunds(float funds) {
+        this.funds = funds;
     }
 }

@@ -29,7 +29,7 @@ public class ExpenseActivity extends AppCompatActivity {
         spn_Account = findViewById(R.id.depense_spn_account);
     }
 
-    public void addExpenseClick(View v){
+    public void addExpenseClick(View v) {
         //rajouté la dépense aux tables expense + historic
     }
 }

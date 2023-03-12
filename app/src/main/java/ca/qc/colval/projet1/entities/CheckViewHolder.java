@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import ca.qc.colval.projet1.R;
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class CheckViewHolder extends RecyclerView.ViewHolder {
     TextView checkNum;
     TextView account;
     TextView amount;
@@ -15,7 +15,7 @@ public class ViewHolder extends RecyclerView.ViewHolder {
     TextView project;
     View container;
 
-    public ViewHolder(View itemView) {
+    public CheckViewHolder(View itemView) {
         super(itemView);
         checkNum = (TextView) itemView.findViewById(R.id.row_lbl_check);
         account = (TextView) itemView.findViewById(R.id.row_lbl_account);
