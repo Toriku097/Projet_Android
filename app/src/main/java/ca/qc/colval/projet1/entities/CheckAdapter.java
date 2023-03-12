@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.dao.BankAccountDAO;
 import ca.qc.colval.projet1.dao.ProjectDAO;
 
-public class CheckAdapter extends RecyclerView.Adapter<ViewHolder> {
+public class CheckAdapter extends RecyclerView.Adapter<CheckViewHolder> {
 
     List<Check> checks;
 
@@ -27,14 +26,14 @@ public class CheckAdapter extends RecyclerView.Adapter<ViewHolder> {
     }
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CheckViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.recyclerview_row, parent, false);
-        return new ViewHolder(view);
+        return new CheckViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CheckViewHolder holder, int position) {
         holder.checkNum.setText(checks.get(position).getCheckNum());
         holder.account.setText(bankDAO.getBankAccountNobyId(checks.get(position).getAccountId()));
         holder.amount.setText(checks.get(position).getAmount());

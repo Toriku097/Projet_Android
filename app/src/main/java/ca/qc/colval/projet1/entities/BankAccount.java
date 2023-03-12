@@ -9,10 +9,11 @@ public class BankAccount {
 
     }
 
-    public BankAccount(int aId,String no,String bank){
+    public BankAccount(int aId,String no,String bank, float funds){
         this.accountId = aId;
         this.noAccount = no;
         this.bank = bank;
+
     }
 
     public int getAccountId() {
@@ -38,4 +39,6 @@ public class BankAccount {
     public void setBank(String bank) {
         this.bank = bank;
     }
+
+
 }

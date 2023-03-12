@@ -6,9 +6,6 @@ import java.util.List;
 public class Supplier {
     private int supplierID;
     private String name;
-
-    private List<Convention> conventions;
-
     public Supplier() {
 
     }
@@ -16,7 +13,7 @@ public class Supplier {
     public Supplier(int supplierID, String name) {
         this.supplierID = supplierID;
         this.name = name;
-        this.conventions = new ArrayList<>();
+
     }
 
     public int getSupplierID() {
@@ -35,11 +32,4 @@ public class Supplier {
         this.name = name;
     }
 
-    public List<Convention> getConventions() {
-        return conventions;
-    }
-
-    public void setConventions(List<Convention> conventions) {
-        this.conventions = conventions;
-    }
 }
