@@ -5,15 +5,15 @@ public class Deadline {
     private String account;
     private double amount;
     private String expenseType;
-    private String dae;
+    private String date;
     private String projectName;
 
-    public Deadline(int checkNum, String account, double amount, String expenseType, String dae, String projectName) {
+    public Deadline(int checkNum, String account, double amount, String expenseType, String date, String projectName) {
         this.checkNum = checkNum;
         this.account = account;
         this.amount = amount;
         this.expenseType = expenseType;
-        this.dae = dae;
+        this.date = date;
         this.projectName = projectName;
     }
 
@@ -50,11 +50,11 @@ public class Deadline {
     }
 
     public String getDae() {
-        return dae;
+        return date;
     }
 
-    public void setDae(String dae) {
-        this.dae = dae;
+    public void setDate(String dae) {
+        this.date = dae;
     }
 
     public String getProjectName() {
