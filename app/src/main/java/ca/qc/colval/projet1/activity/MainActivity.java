@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void toConventionClick(View v){
-        Intent intent = new Intent(this, Convention.class);
+        Intent intent = new Intent(this, ConventionActivity.class);
         startActivity(intent);
     }
     public void toDeadlineClick(View v){
