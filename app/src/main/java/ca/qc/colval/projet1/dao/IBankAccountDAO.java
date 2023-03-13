@@ -9,7 +9,7 @@ public interface IBankAccountDAO {
     List<BankAccount> getAllBankAccounts();
     BankAccount getBankAccountbyId(int id);
     String getBankAccountNobyId(int id);
-    BankAccount addBankAccount(BankAccount account);
+    void addBankAccount(BankAccount account);
     BankAccount updateBankAccountbyId(int id, BankAccount account);
     BankAccount deleteBankAccountbyId(int id);
 }

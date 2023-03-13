@@ -8,12 +8,14 @@ public class Check {
     private int accountId;
     private int projectId;
     private String deadlineDate;
+    private int isPaid;
+
 
     public Check() {
 
     }
 
-    public Check(int checkId, int expenseId, int checkNum, double amount, int accountId, int projectId, String deadlineDate) {
+    public Check(int checkId, int expenseId, int checkNum, double amount, int accountId, int projectId, String deadlineDate,int isPaid) {
         this.checkId = checkId;
         this.expenseId = expenseId;
         this.checkNum = checkNum;
@@ -21,6 +23,7 @@ public class Check {
         this.accountId = accountId;
         this.projectId = projectId;
         this.deadlineDate = deadlineDate;
+        this.isPaid = isPaid;
     }
 
     public int getCheckId() {
@@ -76,4 +79,7 @@ public class Check {
     public void setDeadlineDate(String deadlineDate) {
         this.deadlineDate = deadlineDate;
     }
+    public int getIsPaid() {return isPaid;}
+
+    public void setIsPaid(int isPaid) {isPaid = isPaid;}
 }
