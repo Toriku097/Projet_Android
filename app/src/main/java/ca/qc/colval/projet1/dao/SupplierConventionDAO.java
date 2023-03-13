@@ -20,7 +20,7 @@ public class SupplierConventionDAO implements ISupplierConventionDAO {
     @Override
     public List<SupplierConvention> getAllSupplierConventions() {
         SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
-        String request = "SELECT * FROM Supplier_Conventions";
+        String request = "SELECT * FROM Suppliers_Conventions";
         Cursor cursor = db.rawQuery(request, null);
 
         if(cursor != null) {
@@ -45,7 +45,7 @@ public class SupplierConventionDAO implements ISupplierConventionDAO {
     @Override
     public SupplierConvention getSupplierConventionById(int id) {
         SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
-        String request = "SELECT * FROM SupplierConventions WHERE idcnf = " + id;
+        String request = "SELECT * FROM Suppliers_Conventions WHERE idcnf = " + id;
         Cursor cursor = db.rawQuery(request, null);
 
         if(cursor != null) {
@@ -69,7 +69,7 @@ public class SupplierConventionDAO implements ISupplierConventionDAO {
         values.put("idc", supplierConvention.getConventionId());
         values.put("idf", supplierConvention.getSupplierId());
 
-        db.insert("Supplier_Conventions", null, values);
+        db.insert("Suppliers_Conventions", null, values);
         return getSupplierConventionById(supplierConvention.getSupplierConventionId());
     }
 
@@ -79,7 +79,7 @@ public class SupplierConventionDAO implements ISupplierConventionDAO {
         values.put("idc", supplierConvention.getConventionId());
         values.put("idf", supplierConvention.getSupplierId());
 
-        db.update("Supplier_Conventions", values, "idcnf = ?", new String[]{id + ""});
+        db.update("Suppliers_Conventions", values, "idcnf = ?", new String[]{id + ""});
         return getSupplierConventionById(id);
     }
 
@@ -87,7 +87,7 @@ public class SupplierConventionDAO implements ISupplierConventionDAO {
         SupplierConvention supplierConvention = getSupplierConventionById(id);
         if(supplierConvention != null) {
             SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-            db.delete("Supplier_Conventions", "idcnf = ?", new String[]{id + ""});
+            db.delete("Suppliers_Conventions", "idcnf = ?", new String[]{id + ""});
         }
         return supplierConvention;
     }

@@ -37,20 +37,12 @@ public class ExpenseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense);
 
         //init
-        try {
-            expenses = expenseDAO.getAllExpenses();
-        }
+        try {expenses = expenseDAO.getAllExpenses();}
         catch (java.lang.NullPointerException e){System.out.println(e);}
-        finally {
-            expenses = new ArrayList<>();
-        }
-        try {
-            checks = checkDAO.getAllChecks();
-        }
+        finally {expenses = new ArrayList<>();}
+        try {checks = checkDAO.getAllChecks();}
         catch (java.lang.NullPointerException e){System.out.println(e);}
-        finally {
-            checks = new ArrayList<>();
-        }
+        finally {checks = new ArrayList<>();}
 
         expenseDAO = new ExpenseDAO(this);
         checkDAO = new CheckDAO(this);
