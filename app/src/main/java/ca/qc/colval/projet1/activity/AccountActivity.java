@@ -33,9 +33,17 @@ public class AccountActivity extends AppCompatActivity {
         spn_check = findViewById(R.id.account_spn_check);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        
+    }
+
     //il faut afficher les chèques qui sont en lien avec le compte bancaire sélectionner
 
     public void payCheckClick (View v) {
         //simplement faire disparaitre la facture une fois payés
+
+
     }
 }

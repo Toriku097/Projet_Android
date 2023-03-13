@@ -74,7 +74,6 @@ public class ExpenseActivity extends AppCompatActivity {
     public void addExpenseClick(View v) {
         if(!expenses.isEmpty()) {
             for (Expense expense : expenses) {
-                showToast(""+expenses.size());
                 if (expense.getExpenseId() != expenseId) {
                     addExpense();
                     break;

@@ -52,6 +52,6 @@ public class DeadlineActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
         }
-
     }
+
 }
