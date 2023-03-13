@@ -84,7 +84,6 @@ public class ExpenseActivity extends AppCompatActivity {
             showToast("Premiere donnée ajouté");
             addExpense();
         }
-//(int checkId, int expenseId, int checkNum, double amount, int accountId, int projectId, String deadlineDate,int isPaid)
     }
     private void addExpense(){
         Expense tempExpense;
