@@ -28,5 +28,6 @@ public class ConventionActivity extends AppCompatActivity {
     public void addConventionClick(View v){
 
 
+
     }
 }
