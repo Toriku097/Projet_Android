@@ -81,10 +81,11 @@ public class ProjectDAO implements IProjectDAO{
     public Project addProject(Project project) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
+        values.put("idp", project.getProjectId());
         values.put("name", project.getName());
 
-        int id = (int) db.insert("Projects", null, values);
-        return getProjectbyId(id);
+        db.insert("Projects", null, values);
+        return getProjectbyId(project.getProjectId());
     }
 
     public Project updateProjectbyId(int id, Project project) {

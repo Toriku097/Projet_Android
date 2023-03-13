@@ -73,6 +73,7 @@ public class ExpenseDAO implements IExpenseDAO {
         public Expense addExpense(Expense expense) {
             SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
             ContentValues values = new ContentValues();
+            values.put("idd", expense.getExpenseId());
             values.put("expense_type", expense.getExpenseType());
             values.put("amount", expense.getAmount());
             values.put("payment_method", expense.getPaymentMethod());
@@ -80,8 +81,8 @@ public class ExpenseDAO implements IExpenseDAO {
             values.put("idf", expense.getSupplierId());
             values.put("idp", expense.getProjectId());
 
-            int id = (int) db.insert("Expenses", null, values);
-            return getExpensebyId(id);
+            db.insert("Expenses", null, values);
+            return getExpensebyId(expense.getExpenseId());
         }
 
 

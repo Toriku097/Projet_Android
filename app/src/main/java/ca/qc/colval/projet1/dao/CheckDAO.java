@@ -32,7 +32,7 @@ public class CheckDAO implements ICheckDAO {
                 check.setCheckId(cursor.getInt(0));
                 check.setExpenseId(cursor.getInt(1));
                 check.setCheckNum(cursor.getInt(2));
-                check.setAmount(cursor.getInt(3));
+                check.setAmount(cursor.getDouble(3));
                 check.setAccountId(cursor.getInt(4));
                 check.setProjectId(cursor.getInt(5));
                 check.setDeadlineDate(cursor.getString(6));
@@ -59,7 +59,7 @@ public class CheckDAO implements ICheckDAO {
             check.setCheckId(cursor.getInt(0));
             check.setExpenseId(cursor.getInt(1));
             check.setCheckNum(cursor.getInt(2));
-            check.setAmount(cursor.getInt(3));
+            check.setAmount(cursor.getDouble(3));
             check.setAccountId(cursor.getInt(4));
             check.setProjectId(cursor.getInt(5));
             check.setDeadlineDate(cursor.getString(6));
@@ -74,26 +74,27 @@ public class CheckDAO implements ICheckDAO {
     public Check addCheck(Check check) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("expenseId", check.getExpenseId());
-        values.put("checkNum", check.getCheckNum());
+        values.put("idch", check.getCheckId());
+        values.put("idd", check.getExpenseId());
+        values.put("check_num", check.getCheckNum());
         values.put("amount", check.getAmount());
-        values.put("accountId", check.getAccountId());
-        values.put("projectId", check.getProjectId());
-        values.put("deadlineDate", check.getDeadlineDate());
+        values.put("idch", check.getAccountId());
+        values.put("idp", check.getProjectId());
+        values.put("date", check.getDeadlineDate());
 
-        int id = (int) db.insert("Checks", null, values);
-        return getCheckbyId((int) id);
+        db.insert("Checks", null, values);
+        return getCheckbyId(check.getCheckId());
     }
 
     public Check updateCheckbyId(int id, Check check) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("expenseId", check.getExpenseId());
-        values.put("checkNum", check.getCheckNum());
+        values.put("idd", check.getExpenseId());
+        values.put("check_num", check.getCheckNum());
         values.put("amount", check.getAmount());
-        values.put("accountId", check.getAccountId());
-        values.put("projectId", check.getProjectId());
-        values.put("deadlineDate", check.getDeadlineDate());
+        values.put("idch", check.getAccountId());
+        values.put("idp", check.getProjectId());
+        values.put("date", check.getDeadlineDate());
 
         db.update("Checks", values, "idch = ?", new String[]{id + ""});
         return getCheckbyId(id);
