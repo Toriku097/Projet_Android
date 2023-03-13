@@ -4,7 +4,7 @@ public class Check {
     private int checkId;
     private int expenseId;
     private int checkNum;
-    private int amount;
+    private double amount;
     private int accountId;
     private int projectId;
     private String deadlineDate;
@@ -13,7 +13,7 @@ public class Check {
 
     }
 
-    public Check(int checkId, int expenseId, int checkNum, int amount, int accountId, int projectId, String deadlineDate) {
+    public Check(int checkId, int expenseId, int checkNum, double amount, int accountId, int projectId, String deadlineDate) {
         this.checkId = checkId;
         this.expenseId = expenseId;
         this.checkNum = checkNum;
@@ -46,11 +46,11 @@ public class Check {
         this.checkNum = checkNum;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
