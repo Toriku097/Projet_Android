@@ -5,7 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +21,7 @@ import ca.qc.colval.projet1.entities.CheckAdapter;
 public class DeadlineActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+    TextView emptyView;
     CheckAdapter adapter;
     CheckDAO dao;
     List<Check> checks;
@@ -30,6 +34,7 @@ public class DeadlineActivity extends AppCompatActivity {
         setContentView(R.layout.activity_echeancier);
 
         recyclerView = findViewById(R.id.recyclerCheck);
+        emptyView = findViewById(R.id.empty_view);
         checks = dao.getAllChecks();
 
         adapter = new CheckAdapter(checks);
@@ -37,6 +42,14 @@ public class DeadlineActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
 
+        if (checks.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
+        }
 
     }
 }
