@@ -69,8 +69,8 @@ public class SupplierConventionDAO implements ISupplierConventionDAO {
         values.put("idc", supplierConvention.getConventionId());
         values.put("idf", supplierConvention.getSupplierId());
 
-        int id = (int) db.insert("Supplier_Conventions", null, values);
-        return getSupplierConventionById(id);
+        db.insert("Supplier_Conventions", null, values);
+        return getSupplierConventionById(supplierConvention.getSupplierConventionId());
     }
 
     public SupplierConvention updateSupplierConventionById(int id, SupplierConvention supplierConvention) {
