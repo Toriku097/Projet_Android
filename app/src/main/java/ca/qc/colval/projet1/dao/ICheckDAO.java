@@ -11,7 +11,7 @@ public interface ICheckDAO {
 
     Check getCheckbyId(int id);
 
-    void addCheck(Check check);
+    Check addCheck(Check check);
 
     Check updateCheckbyId(int id, Check check);
 
