@@ -33,22 +33,24 @@ public class DeadlineActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_echeancier);
 
-        recyclerView = findViewById(R.id.recyclerCheck);
-        emptyView = findViewById(R.id.empty_view);
-        checks = dao.getAllChecks();
+        try {
+            recyclerView = findViewById(R.id.recyclerCheck);
+            emptyView = findViewById(R.id.empty_view);
+            checks = dao.getAllChecks();
 
-        adapter = new CheckAdapter(checks);
-        LinearLayoutManager manager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(manager);
-        recyclerView.setAdapter(adapter);
-
-        if (checks.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        }
-        else {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
+
+            adapter = new CheckAdapter(checks);
+            LinearLayoutManager manager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(manager);
+            recyclerView.setAdapter(adapter);
+        } catch(NullPointerException e) {
+            recyclerView = findViewById(R.id.recyclerCheck);
+            emptyView = findViewById(R.id.empty_view);
+
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
         }
 
     }
