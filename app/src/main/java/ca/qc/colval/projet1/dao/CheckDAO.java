@@ -78,10 +78,11 @@ public class CheckDAO implements ICheckDAO {
         values.put("idd", check.getExpenseId());
         values.put("check_num", check.getCheckNum());
         values.put("amount", check.getAmount());
-        values.put("idch", check.getAccountId());
+        values.put("idcb", check.getAccountId());
         values.put("idp", check.getProjectId());
         values.put("date", check.getDeadlineDate());
-
+        values.put("isPaid",check.getIsPaid());
+//(int checkId, int expenseId, int checkNum, double amount, int accountId, int projectId, String deadlineDate,int isPaid)
         db.insert("Checks", null, values);
         return getCheckbyId(check.getCheckId());
     }

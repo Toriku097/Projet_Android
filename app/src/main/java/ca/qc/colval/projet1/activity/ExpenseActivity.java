@@ -11,10 +11,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.dao.CheckDAO;
 import ca.qc.colval.projet1.dao.ExpenseDAO;
+import ca.qc.colval.projet1.entities.Check;
 import ca.qc.colval.projet1.entities.Expense;
 
 public class ExpenseActivity extends AppCompatActivity {
@@ -25,6 +27,9 @@ public class ExpenseActivity extends AppCompatActivity {
     ExpenseDAO expenseDAO;
     CheckDAO checkDAO;
     List<Expense> expenses;
+    List<Check> checks;
+
+    Random random;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +44,13 @@ public class ExpenseActivity extends AppCompatActivity {
         finally {
             expenses = new ArrayList<>();
         }
+        try {
+            checks = checkDAO.getAllChecks();
+        }
+        catch (java.lang.NullPointerException e){System.out.println(e);}
+        finally {
+            checks = new ArrayList<>();
+        }
 
         expenseDAO = new ExpenseDAO(this);
         checkDAO = new CheckDAO(this);
@@ -50,6 +62,7 @@ public class ExpenseActivity extends AppCompatActivity {
         spn_project = findViewById(R.id.depense_spn_project);
         spn_paymentMethod = findViewById(R.id.depense_spn_paymentMethod);
         spn_Account = findViewById(R.id.depense_spn_account);
+        random = new Random();
     }
 
     public void addExpenseClick(View v) {
@@ -60,27 +73,45 @@ public class ExpenseActivity extends AppCompatActivity {
         Double amount = Double.parseDouble(txt_amount.getText().toString());
         String payment = spn_paymentMethod.getSelectedItem().toString();
         int[] id = getId();
+        int checkId = 1;
+        String date = txt_date.getText().toString();
 
         if(expenses.isEmpty()==false) {
-            showToast("has value");
+            expenseId++;
             for (Expense expense : expenses) {
-                if (expense.getExpenseId() == expenseId) {
+                if (expense.getExpenseId() != expenseId) {
                     tempExpense = new Expense(expenseId,expenseType,amount, payment,id[0], id[1], id[2]);
                     expenseDAO.addExpense(tempExpense);
                     expenses.add(tempExpense);
                     showToast("Dépense ajouté");
+                    if(payment.equals("Chèque")){
+                        checkId++;
+                        Check tempCheck = new Check(checkId,expenseId, random.nextInt(666),amount,id[1],id[0],date,0);
+                        checkDAO.addCheck(tempCheck);
+                        checks.add(tempCheck);
+                        showToast("Cheque ajouté");
+                    }
                     break;
                 }
+                showToast("++");
                 expenseId++;
             }
         }else {
             tempExpense = new Expense(expenseId,expenseType,amount, payment,id[0], id[1], id[2]);
             expenseDAO.addExpense(tempExpense);
-            showToast("add to dao");
             expenses.add(tempExpense);
-            showToast("add to list");
             showToast("Dépense ajouté");
+            if(payment.equals("Chèque")){
+                Check tempCheck = new Check(checkId,expenseId, random.nextInt(666),amount,id[1],id[0],date,0);
+                showToast("objet cree");
+                checkDAO.addCheck(tempCheck);
+                showToast("dao");
+                checks.add(tempCheck);
+                showToast("list");
+                showToast("Cheque ajouté");
+            }
         }
+//(int checkId, int expenseId, int checkNum, double amount, int accountId, int projectId, String deadlineDate,int isPaid)
     }
         private int[] getId(){
             int[] id = new int[3];
