@@ -2,12 +2,14 @@ package ca.qc.colval.projet1.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -66,7 +68,15 @@ public class AccountActivity extends AppCompatActivity {
     }
 
     public void payCheckClick (View v) {
-        //simplement faire disparaitre la facture une fois payés
+        String id = spn_check.getSelectedItem().toString();
+        showToast("1");
 
+        checkDAO.updateCheckbyId(Integer.parseInt(id));
+        showToast("Payé");
+    }
+    private void showToast(String msg) {
+        Context context = getApplicationContext();
+        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }

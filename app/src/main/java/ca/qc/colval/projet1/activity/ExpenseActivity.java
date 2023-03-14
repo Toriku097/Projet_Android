@@ -141,9 +141,9 @@ public class ExpenseActivity extends AppCompatActivity {
 
             return id;
         }
-        private void showToast(String msg) {
-            Context context = getApplicationContext();
-            Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
-            toast.show();
+    private void showToast(String msg) {
+        Context context = getApplicationContext();
+        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        toast.show();
     }
 }
