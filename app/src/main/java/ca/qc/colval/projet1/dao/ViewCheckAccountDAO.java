@@ -17,13 +17,13 @@ public class ViewCheckAccountDAO {
     public List<String> getCheckNumByAccount(String accNum) {
 
         SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
-        String request = "SELECT checks_num FROM viewCheck_Account WHERE isPaid = 0 AND acc_num = '" + accNum + "'";
+        String request = "SELECT * FROM viewCheck_Account WHERE isPaid = 0 AND acc_num = '" + accNum + "'";
         Cursor cursor = db.rawQuery(request,null);
         if(cursor != null) {
             cursor.moveToFirst();
             List<String> list = new ArrayList<>();
             while (!cursor.isAfterLast()){
-                list.add(cursor.getString(1));
+                list.add(cursor.getString(0));
                 cursor.moveToNext();
             }
             return list;
@@ -32,19 +32,22 @@ public class ViewCheckAccountDAO {
     }
     public List<ViewCheckAccount> getCheckByAccount(String accNum) {
         SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
-        String request = "SELECT checks_num FROM viewCheck_Account WHERE isPaid = 0 AND acc_num = '" + accNum + "'";
+        String request = "SELECT * FROM viewCheck_Account WHERE isPaid = 0 AND acc_num = '" + accNum + "'";
         Cursor cursor = db.rawQuery(request,null);
         if(cursor != null) {
             cursor.moveToFirst();
             List<ViewCheckAccount> list = new ArrayList<>();
             while (!cursor.isAfterLast()){
                 ViewCheckAccount vCA = new ViewCheckAccount();
-                vCA.setCheckID(cursor.getInt(2));
-                vCA.setCheckNum(cursor.getInt(1));
+                vCA.setCheckNum(cursor.getInt(0));
+                vCA.setCheckID(cursor.getInt(1));
+
 
                 list.add(vCA);
                 cursor.moveToNext();
             }
+            db.close();
+            cursor.close();
             return list;
         }
         return null;
