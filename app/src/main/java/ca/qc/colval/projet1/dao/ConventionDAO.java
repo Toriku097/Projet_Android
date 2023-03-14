@@ -63,10 +63,10 @@ public class ConventionDAO implements IConventionDAO{
     public Convention addConvention(Convention convention) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("idc", convention.getConventionId());
         values.put("name", convention.getName());
 
-        db.insert("Conventions", null, values);
+        int id = (int) db.insert("Conventions", null, values);
+        convention.setConventionId(id);
         return getConventionbyId(convention.getConventionId());
     }
 

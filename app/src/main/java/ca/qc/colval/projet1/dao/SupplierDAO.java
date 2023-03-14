@@ -65,11 +65,11 @@ public class SupplierDAO implements ISupplierDAO {
     public Supplier addSupplier(Supplier supplier) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("idf", supplier.getSupplierID());
         values.put("name", supplier.getName());
 
         int id = (int) db.insert("Suppliers", null, values);
-        return getSupplierbyId(id);
+        supplier.setSupplierID(id);
+        return getSupplierbyId(supplier.getSupplierID());
     }
 
 

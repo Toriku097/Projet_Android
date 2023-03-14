@@ -65,11 +65,11 @@ public class SupplierConventionDAO implements ISupplierConventionDAO {
     public SupplierConvention addSupplierConvention(SupplierConvention supplierConvention) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("idcnf", supplierConvention.getSupplierConventionId());
         values.put("idc", supplierConvention.getConventionId());
         values.put("idf", supplierConvention.getSupplierId());
 
-        db.insert("Suppliers_Conventions", null, values);
+        int id = (int) db.insert("Suppliers_Conventions", null, values);
+        supplierConvention.setSupplierConventionId(id);
         return getSupplierConventionById(supplierConvention.getSupplierConventionId());
     }
 

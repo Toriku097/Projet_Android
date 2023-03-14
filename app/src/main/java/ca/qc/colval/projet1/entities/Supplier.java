@@ -11,7 +11,6 @@ public class Supplier {
     }
 
     public Supplier(int supplierID, String name) {
-        this.supplierID = supplierID;
         this.name = name;
 
     }

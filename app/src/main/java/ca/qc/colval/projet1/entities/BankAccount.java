@@ -9,8 +9,7 @@ public class BankAccount {
 
     }
 
-    public BankAccount(int aId,String no,String bank, float funds){
-        this.accountId = aId;
+    public BankAccount(int aId,String no,String bank){
         this.noAccount = no;
         this.bank = bank;
 

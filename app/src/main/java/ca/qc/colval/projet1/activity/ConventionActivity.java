@@ -16,6 +16,7 @@ import java.util.List;
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.dao.SupplierConventionDAO;
 import ca.qc.colval.projet1.entities.SupplierConvention;
+import ca.qc.colval.projet1.control.SupplierConventionControl;
 
 public class ConventionActivity extends AppCompatActivity {
 

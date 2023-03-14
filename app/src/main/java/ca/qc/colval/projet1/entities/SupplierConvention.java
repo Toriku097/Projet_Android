@@ -12,7 +12,6 @@ public class SupplierConvention {
 
 
     public SupplierConvention(int supplierConventionId, int conventionId, int supplierId) {
-        this.supplierConventionId = supplierConventionId;
         this.conventionId = conventionId;
         this.supplierId = supplierId;
     }

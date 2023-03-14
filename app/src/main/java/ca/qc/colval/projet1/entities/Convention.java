@@ -8,8 +8,7 @@ public class Convention {
 
     }
 
-    public Convention(int conventionId, String name) {
-        this.conventionId = conventionId;
+    public Convention(String name) {
         this.name = name;
     }
 

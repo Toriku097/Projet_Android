@@ -84,12 +84,12 @@ public class BankAccountDAO implements IBankAccountDAO {
     public BankAccount addBankAccount(BankAccount account) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("idcb", account.getAccountId());
         values.put("acc_num", account.getNoAccount());
         values.put("bank", account.getBank());
 
-        db.insert("BankAccounts", null, values);
-        return getBankAccountbyId(account.getAccountId());
+        int id = (int) db.insert("BankAccounts", null, values);
+        account.setAccountId(id);
+        return getBankAccountbyId(id);
     }
 
 
@@ -97,7 +97,6 @@ public class BankAccountDAO implements IBankAccountDAO {
     public BankAccount updateBankAccountbyId(int id, BankAccount account) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("idcb",account.getAccountId());
         values.put("acc_num", account.getNoAccount());
         values.put("bank", account.getBank());
 

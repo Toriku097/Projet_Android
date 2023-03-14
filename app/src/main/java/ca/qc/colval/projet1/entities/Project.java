@@ -9,8 +9,7 @@ public class Project {
 
     }
 
-    public Project(int projectId, String name, double totalExpenses) {
-        this.projectId = projectId;
+    public Project(String name, double totalExpenses) {
         this.name = name;
         this.totalExpenses = totalExpenses;
     }

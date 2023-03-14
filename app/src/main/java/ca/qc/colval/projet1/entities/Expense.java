@@ -13,8 +13,8 @@ public class Expense {
 
     }
 
-    public Expense(int expenseId, String expenseType, double amount, String paymentMethod, int bankAccountId, int supplierId, int projectId) {
-        this.expenseId = expenseId;
+    public Expense(String expenseType, double amount, String paymentMethod, int bankAccountId, int supplierId, int projectId) {
+
         this.expenseType = expenseType;
         this.amount = amount;
         this.paymentMethod = paymentMethod;

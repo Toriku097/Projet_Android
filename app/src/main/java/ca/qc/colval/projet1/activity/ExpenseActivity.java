@@ -74,7 +74,6 @@ public class ExpenseActivity extends AppCompatActivity {
     public void addExpenseClick(View v) {
         if(!expenses.isEmpty()) {
             for (Expense expense : expenses) {
-                showToast(""+expenses.size());
                 if (expense.getExpenseId() != expenseId) {
                     addExpense();
                     break;
@@ -92,7 +91,7 @@ public class ExpenseActivity extends AppCompatActivity {
         String payment = spn_paymentMethod.getSelectedItem().toString();
         int[] id = getId();
 
-        tempExpense = new Expense(expenseId,expenseType,amount, payment,id[0], id[1], id[2]);
+        tempExpense = new Expense(expenseType,amount, payment,id[0], id[1], id[2]);
         expenseDAO.addExpense(tempExpense);
         expenses.add(tempExpense);
         showToast("Dépense ajouté");
@@ -107,7 +106,7 @@ public class ExpenseActivity extends AppCompatActivity {
         int[] id = getId();
         String date = txt_date.getText().toString();
 
-        Check tempCheck = new Check(checkId,expenseId, random.nextInt(666),amount,id[1],id[0],date,0);
+        Check tempCheck = new Check(expenseId, random.nextInt(666),amount,id[1],id[0],date,0);
         checkDAO.addCheck(tempCheck);
         checks.add(tempCheck);
         showToast("Cheque ajouté");

@@ -15,8 +15,7 @@ public class Check {
 
     }
 
-    public Check(int checkId, int expenseId, int checkNum, double amount, int accountId, int projectId, String deadlineDate,int isPaid) {
-        this.checkId = checkId;
+    public Check(int expenseId, int checkNum, double amount, int accountId, int projectId, String deadlineDate,int isPaid) {
         this.expenseId = expenseId;
         this.checkNum = checkNum;
         this.amount = amount;
