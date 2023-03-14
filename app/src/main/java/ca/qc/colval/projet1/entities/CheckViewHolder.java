@@ -8,9 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import ca.qc.colval.projet1.R;
 
 public class CheckViewHolder extends RecyclerView.ViewHolder {
-    TextView checkNum;
-    TextView amount;
-    TextView date;
+    TextView checkNum,amount, date;
     View container;
 
     public CheckViewHolder(View itemView) {
