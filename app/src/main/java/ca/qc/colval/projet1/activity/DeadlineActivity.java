@@ -23,10 +23,11 @@ public class DeadlineActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     TextView emptyView;
     CheckAdapter adapter;
-    CheckDAO dao;
     List<Check> checks;
 
+    Check tempCheck = new Check(2, 12345, 90.75, 2, 2, "2022-12-22", 1);
 
+    //change to deadline instead of check please jesu schrist fucking my god i want tofucking kill someone
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,8 @@ public class DeadlineActivity extends AppCompatActivity {
         try {
             recyclerView = findViewById(R.id.recyclerCheck);
             emptyView = findViewById(R.id.empty_view);
-            checks = dao.getAllChecks();
+            checks = new ArrayList<>();
+            checks.add(tempCheck);
 
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
@@ -45,13 +47,24 @@ public class DeadlineActivity extends AppCompatActivity {
             LinearLayoutManager manager = new LinearLayoutManager(this);
             recyclerView.setLayoutManager(manager);
             recyclerView.setAdapter(adapter);
-        } catch(NullPointerException e) {
+        } catch (NullPointerException e) {
             recyclerView = findViewById(R.id.recyclerCheck);
             emptyView = findViewById(R.id.empty_view);
 
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
         }
-
     }
+
+    /* @Override
+    protected void onStart() {
+        super.onStart();
+        checks = dao.getAllChecks();
+
+
+        adapter = new CheckAdapter(checks);
+        LinearLayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
+        recyclerView.setAdapter(adapter);
+    } */
 }
