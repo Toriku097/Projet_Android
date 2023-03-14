@@ -19,35 +19,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/row_lbl_check"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Numéro de chèque" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/row_lbl_account"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Compte" />
+            <TextView
+                android:id="@+id/row_lbl_check"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="Numéro de chèque" />
 
-        <TextView
-            android:id="@+id/row_lbl_amount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Montant" />
+            <TextView
+                android:id="@+id/row_lbl_amount"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:background="#C8C8C8"
+                android:text="Montant" />
 
-        <TextView
-            android:id="@+id/row_lbl_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Date" />
-
-        <TextView
-            android:id="@+id/row_lbl_project"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Projet" />
+            <TextView
+                android:id="@+id/row_lbl_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date" />
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
