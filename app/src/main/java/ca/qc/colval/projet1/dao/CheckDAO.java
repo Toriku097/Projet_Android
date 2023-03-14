@@ -91,7 +91,15 @@ public class CheckDAO implements ICheckDAO {
     public Check updateCheckbyId(int id) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("isPaid", 1);
+        Check check = getCheckbyId(id);
+        values.put("idch", check.getCheckId());
+        values.put("idd", check.getExpenseId());
+        values.put("check_num", check.getCheckNum());
+        values.put("amount", check.getAmount());
+        values.put("idcb", check.getAccountId());
+        values.put("idp", check.getProjectId());
+        values.put("date", check.getDeadlineDate());
+        values.put("isPaid",1);
 
         db.update("Checks", values, "idch = ?", new String[]{id + ""});
         return getCheckbyId(id);
