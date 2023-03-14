@@ -24,7 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO Suppliers (idf, name) VALUES (1, 'Buildmate'), (2, 'Constructronix'), (3, 'SteelScape'), (4, 'Concretopia'), (5, 'LumberLink'), (6, 'PlumbingPro')");
         db.execSQL("INSERT INTO BankAccounts (idcb, acc_num, bank) VALUES (1, 'BC1_RBC Scott', 'RBC'), (2, 'BC2_BN', 'BN')");
         db.execSQL("INSERT INTO Projects (idp, name) VALUES (1, 'Les Jardins Mercier'), (2, 'YUL Condominiums')");
-        db.execSQL("CREATE VIEW IF NOT EXISTS viewCheck_Account AS select BankAccounts.acc_num AS  acc_num, Checks.check_num as checks_num FROM Expenses JOIN BankAccounts on Expenses.idcb = BankAccounts.idcb join Checks on Expenses.idd = Checks.idd");
+        db.execSQL("CREATE VIEW IF NOT EXISTS viewCheck_Account AS select BankAccounts.acc_num AS  acc_num, Checks.check_num as checks_num, Checks.idch as idch FROM Expenses JOIN BankAccounts on Expenses.idcb = BankAccounts.idcb join Checks on Expenses.idd = Checks.idd");
     }
 
 

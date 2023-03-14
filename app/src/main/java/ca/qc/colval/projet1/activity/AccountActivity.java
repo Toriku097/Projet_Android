@@ -9,14 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
 import ca.qc.colval.projet1.R;
-import ca.qc.colval.projet1.dao.BankAccountDAO;
 import ca.qc.colval.projet1.dao.CheckDAO;
 import ca.qc.colval.projet1.dao.ViewCheckAccountDAO;
+import ca.qc.colval.projet1.entities.ViewCheckAccount;
 
 public class AccountActivity extends AppCompatActivity {
 
@@ -26,7 +25,8 @@ public class AccountActivity extends AppCompatActivity {
     ViewCheckAccountDAO viewCheckAccountDAO;
     CheckDAO checkDAO;
 
-    List<Integer> list;
+    List<ViewCheckAccount> infoList;
+    List<String> numList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +46,26 @@ public class AccountActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String newItem = spn_account.getSelectedItem().toString();
 
-                try { list = viewCheckAccountDAO.getCheckByAccount(newItem);}
-                catch (java.lang.NullPointerException e) {list = new ArrayList<>();}
+                try {
+                    infoList = viewCheckAccountDAO.getCheckByAccount(newItem);
+                    numList = viewCheckAccountDAO.getCheckNumByAccount(newItem);
+                }
+                catch (java.lang.NullPointerException e) {
+                    infoList = new ArrayList<>();
+                    numList = new ArrayList<>();
+                }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,numList);
+                spn_check.setAdapter(adapter);
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
+            public void onNothingSelected(AdapterView<?> parent) {}
         });
     }
 
     public void payCheckClick (View v) {
         //simplement faire disparaitre la facture une fois payés
-
 
     }
 }

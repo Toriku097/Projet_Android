@@ -13,7 +13,7 @@ public interface ICheckDAO {
 
     Check addCheck(Check check);
 
-    Check updateCheckbyId(int id, Check check);
+    Check updateCheckbyId(int id);
 
     Check deleteCheckbyId(int id);
 }
