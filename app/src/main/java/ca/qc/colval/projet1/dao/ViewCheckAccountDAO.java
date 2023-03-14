@@ -17,7 +17,7 @@ public class ViewCheckAccountDAO {
     public List<String> getCheckNumByAccount(String accNum) {
 
         SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
-        String request = "SELECT checks_num FROM viewCheck_Account WHERE acc_num = " + accNum;
+        String request = "SELECT checks_num FROM viewCheck_Account WHERE isPaid = 0 AND acc_num = '" + accNum + "'";
         Cursor cursor = db.rawQuery(request,null);
         if(cursor != null) {
             cursor.moveToFirst();
@@ -32,7 +32,7 @@ public class ViewCheckAccountDAO {
     }
     public List<ViewCheckAccount> getCheckByAccount(String accNum) {
         SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
-        String request = "SELECT checks_num FROM viewCheck_Account WHERE acc_num = " + accNum;
+        String request = "SELECT checks_num FROM viewCheck_Account WHERE isPaid = 0 AND acc_num = '" + accNum + "'";
         Cursor cursor = db.rawQuery(request,null);
         if(cursor != null) {
             cursor.moveToFirst();

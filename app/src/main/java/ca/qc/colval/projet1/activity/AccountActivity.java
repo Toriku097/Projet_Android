@@ -53,9 +53,10 @@ public class AccountActivity extends AppCompatActivity {
                 catch (java.lang.NullPointerException e) {
                     infoList = new ArrayList<>();
                     numList = new ArrayList<>();
+                    numList.add("Empty");
                 }
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item,numList);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AccountActivity.this, android.R.layout.simple_spinner_dropdown_item,numList);
                 spn_check.setAdapter(adapter);
             }
 
