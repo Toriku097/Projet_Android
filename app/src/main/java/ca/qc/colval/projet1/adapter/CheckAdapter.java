@@ -1,4 +1,4 @@
-package ca.qc.colval.projet1.entities;
+package ca.qc.colval.projet1.adapter;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import ca.qc.colval.projet1.R;
-import ca.qc.colval.projet1.dao.BankAccountDAO;
-import ca.qc.colval.projet1.dao.ProjectDAO;
+import ca.qc.colval.projet1.entities.Check;
 
 public class CheckAdapter extends RecyclerView.Adapter<CheckViewHolder> {
 

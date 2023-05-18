@@ -1,4 +1,4 @@
-package ca.qc.colval.projet1.entities;
+package ca.qc.colval.projet1.adapter;
 
 import android.view.View;
 import android.widget.TextView;
