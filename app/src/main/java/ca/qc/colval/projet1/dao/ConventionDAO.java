@@ -17,29 +17,29 @@ public class ConventionDAO implements IConventionDAO{
         this.singleton = Singleton.getSingleInstance(context);
     }
 
-    @Override
-    public List<Convention> getAllConventions() {
-        SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
-        String request = "SELECT * FROM Conventions";
-        Cursor cursor = db.rawQuery(request, null);
-
-        if(cursor != null) {
-            cursor.moveToFirst();
-            List<Convention> conventions = new ArrayList<>();
-            while(!cursor.isAfterLast()) {
-                Convention convention = new Convention();
-                convention.setConventionId(cursor.getInt(0));
-                convention.setName(cursor.getString(1));
-
-                conventions.add(convention);
-                cursor.moveToNext();
-            }
-            db.close();
-            cursor.close();
-            return conventions;
-        }
-        return null;
-    }
+//    @Override
+//    public List<Convention> getAllConventions() {
+//        SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
+//        String request = "SELECT * FROM Conventions";
+//        Cursor cursor = db.rawQuery(request, null);
+//
+//        if(cursor != null) {
+//            cursor.moveToFirst();
+//            List<Convention> conventions = new ArrayList<>();
+//            while(!cursor.isAfterLast()) {
+//                Convention convention = new Convention();
+//                convention.setConventionId(cursor.getInt(0));
+//                convention.setName(cursor.getString(1));
+//
+//                conventions.add(convention);
+//                cursor.moveToNext();
+//            }
+//            db.close();
+//            cursor.close();
+//            return conventions;
+//        }
+//        return null;
+//    }
 
     @Override
     public Convention getConventionbyId(int id) {
@@ -60,31 +60,31 @@ public class ConventionDAO implements IConventionDAO{
         return null;
     }
 
-    public Convention addConvention(Convention convention) {
-        SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("idc", convention.getConventionId());
-        values.put("name", convention.getName());
-
-        db.insert("Conventions", null, values);
-        return getConventionbyId(convention.getConventionId());
-    }
-
-    public Convention updateConventionbyId(int id, Convention convention) {
-        SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("name", convention.getName());
-
-        db.update("Conventions", values, "idc = ?", new String[]{id + ""});
-        return getConventionbyId(id);
-    }
-
-    public Convention deleteConventionbyId(int id) {
-        Convention convention = getConventionbyId(id);
-        if(convention != null) {
-            SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-            db.delete("Conventions", "idc = ?", new String[]{id + ""});
-        }
-        return convention;
-    }
+//    public Convention addConvention(Convention convention) {
+//        SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("idc", convention.getConventionId());
+//        values.put("name", convention.getName());
+//
+//        db.insert("Conventions", null, values);
+//        return getConventionbyId(convention.getConventionId());
+//    }
+//
+//    public Convention updateConventionbyId(int id, Convention convention) {
+//        SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("name", convention.getName());
+//
+//        db.update("Conventions", values, "idc = ?", new String[]{id + ""});
+//        return getConventionbyId(id);
+//    }
+//
+//    public Convention deleteConventionbyId(int id) {
+//        Convention convention = getConventionbyId(id);
+//        if(convention != null) {
+//            SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
+//            db.delete("Conventions", "idc = ?", new String[]{id + ""});
+//        }
+//        return convention;
+//    }
 }

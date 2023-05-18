@@ -15,5 +15,5 @@ public interface ICheckDAO {
 
     Check updateCheckbyId(int id);
 
-    Check deleteCheckbyId(int id);
+    // Check deleteCheckbyId(int id);
 }

@@ -71,7 +71,7 @@ public class CheckDAO implements ICheckDAO {
         }
         return null;
     }
-
+    @Override
     public Check addCheck(Check check) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -88,6 +88,7 @@ public class CheckDAO implements ICheckDAO {
         return getCheckbyId(check.getCheckId());
     }
 
+    @Override
     public Check updateCheckbyId(int id) {
         SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -105,12 +106,12 @@ public class CheckDAO implements ICheckDAO {
         return getCheckbyId(id);
     }
 
-    public Check deleteCheckbyId(int id) {
-        Check check = getCheckbyId(id);
-        if(check != null) {
-            SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-            db.delete("Checks", "idch = ?", new String[]{id + ""});
-        }
-        return check;
-    }
+//    public Check deleteCheckbyId(int id) {
+//        Check check = getCheckbyId(id);
+//        if(check != null) {
+//            SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
+//            db.delete("Checks", "idch = ?", new String[]{id + ""});
+//        }
+//        return check;
+//    }
 }

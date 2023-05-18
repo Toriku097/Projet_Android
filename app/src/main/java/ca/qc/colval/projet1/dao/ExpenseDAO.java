@@ -86,28 +86,28 @@ public class ExpenseDAO implements IExpenseDAO {
         }
 
 
-        @Override
-        public Expense updateExpensebyId(int id, Expense expense) {
-            SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-            ContentValues values = new ContentValues();
-            values.put("expense_type", expense.getExpenseType());
-            values.put("amount", expense.getAmount());
-            values.put("payment_method", expense.getPaymentMethod());
-            values.put("idcb", expense.getBankAccountId());
-            values.put("idf", expense.getSupplierId());
-            values.put("idp", expense.getProjectId());
-
-            db.update("Expenses", values, "idd = ?", new String[]{ id+""});
-            return getExpensebyId(id);
-        }
-
-        @Override
-        public Expense deleteExpensebyId(int id) {
-            Expense expense = getExpensebyId(id);
-            if(expense != null) {
-                SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-                db.delete("Expenses","idd = ?", new String[]{id + ""});
-            }
-            return expense;
-        }
+//        @Override
+//        public Expense updateExpensebyId(int id, Expense expense) {
+//            SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
+//            ContentValues values = new ContentValues();
+//            values.put("expense_type", expense.getExpenseType());
+//            values.put("amount", expense.getAmount());
+//            values.put("payment_method", expense.getPaymentMethod());
+//            values.put("idcb", expense.getBankAccountId());
+//            values.put("idf", expense.getSupplierId());
+//            values.put("idp", expense.getProjectId());
+//
+//            db.update("Expenses", values, "idd = ?", new String[]{ id+""});
+//            return getExpensebyId(id);
+//        }
+//
+//        @Override
+//        public Expense deleteExpensebyId(int id) {
+//            Expense expense = getExpensebyId(id);
+//            if(expense != null) {
+//                SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
+//                db.delete("Expenses","idd = ?", new String[]{id + ""});
+//            }
+//            return expense;
+//        }
 }

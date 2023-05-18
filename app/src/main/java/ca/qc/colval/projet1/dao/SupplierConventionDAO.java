@@ -73,22 +73,22 @@ public class SupplierConventionDAO implements ISupplierConventionDAO {
         return getSupplierConventionById(supplierConvention.getSupplierConventionId());
     }
 
-    public SupplierConvention updateSupplierConventionById(int id, SupplierConvention supplierConvention) {
-        SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("idc", supplierConvention.getConventionId());
-        values.put("idf", supplierConvention.getSupplierId());
-
-        db.update("Suppliers_Conventions", values, "idcnf = ?", new String[]{id + ""});
-        return getSupplierConventionById(id);
-    }
-
-    public SupplierConvention deleteSupplierConventionById(int id) {
-        SupplierConvention supplierConvention = getSupplierConventionById(id);
-        if(supplierConvention != null) {
-            SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
-            db.delete("Suppliers_Conventions", "idcnf = ?", new String[]{id + ""});
-        }
-        return supplierConvention;
-    }
+//    public SupplierConvention updateSupplierConventionById(int id, SupplierConvention supplierConvention) {
+//        SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
+//        ContentValues values = new ContentValues();
+//        values.put("idc", supplierConvention.getConventionId());
+//        values.put("idf", supplierConvention.getSupplierId());
+//
+//        db.update("Suppliers_Conventions", values, "idcnf = ?", new String[]{id + ""});
+//        return getSupplierConventionById(id);
+//    }
+//
+//    public SupplierConvention deleteSupplierConventionById(int id) {
+//        SupplierConvention supplierConvention = getSupplierConventionById(id);
+//        if(supplierConvention != null) {
+//            SQLiteDatabase db = this.singleton.helper.getWritableDatabase();
+//            db.delete("Suppliers_Conventions", "idcnf = ?", new String[]{id + ""});
+//        }
+//        return supplierConvention;
+//    }
 }

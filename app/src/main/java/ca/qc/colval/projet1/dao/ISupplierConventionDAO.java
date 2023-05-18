@@ -11,7 +11,7 @@ public interface ISupplierConventionDAO {
 
     SupplierConvention addSupplierConvention(SupplierConvention supplierConvention);
 
-    SupplierConvention updateSupplierConventionById(int id, SupplierConvention supplierConvention);
-
-    SupplierConvention deleteSupplierConventionById(int id);
+//    SupplierConvention updateSupplierConventionById(int id, SupplierConvention supplierConvention);
+//
+//    SupplierConvention deleteSupplierConventionById(int id);
 }
