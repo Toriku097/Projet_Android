@@ -4,13 +4,16 @@ public class Convention {
     private int conventionId;
     private String name;
 
+    private int amount;
+
     public Convention() {
 
     }
 
-    public Convention(int conventionId, String name) {
+    public Convention(int conventionId, String name, int amount) {
         this.conventionId = conventionId;
         this.name = name;
+        this.amount = amount;
     }
 
     public int getConventionId() {
@@ -27,5 +30,14 @@ public class Convention {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    //getters and setters for amount
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }
