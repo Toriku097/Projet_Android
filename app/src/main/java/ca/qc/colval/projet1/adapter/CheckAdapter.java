@@ -1,5 +1,6 @@
 package ca.qc.colval.projet1.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,11 @@ import ca.qc.colval.projet1.entities.Check;
 public class CheckAdapter extends RecyclerView.Adapter<CheckViewHolder> {
 
     List<Check> checks;
+    Context context;
 
-    public CheckAdapter(List<Check> checks) {
+    public CheckAdapter(List<Check> checks, Context context) {
         this.checks = checks;
+        this.context = context;
     }
     @NonNull
     @Override
