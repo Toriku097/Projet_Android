@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.qc.colval.projet1.entities.Convention;
+import ca.qc.colval.projet1.entities.Contract;
 
 public class ConventionDAO implements IConventionDAO{
 
@@ -42,20 +42,20 @@ public class ConventionDAO implements IConventionDAO{
 //    }
 
     @Override
-    public Convention getConventionbyId(int id) {
+    public Contract getContractbyId(int id) {
         SQLiteDatabase db = this.singleton.helper.getReadableDatabase();
         String request = "SELECT * FROM Conventions WHERE idc = " + id;
         Cursor cursor = db.rawQuery(request, null);
 
         if(cursor != null) {
             cursor.moveToFirst();
-            Convention convention = new Convention();
-            convention.setConventionId(cursor.getInt(0));
-            convention.setName(cursor.getString(1));
+            Contract contract = new Contract();
+            contract.setContractId(cursor.getInt(0));
+            contract.setName(cursor.getString(1));
 
             db.close();
             cursor.close();
-            return convention;
+            return contract;
         }
         return null;
     }

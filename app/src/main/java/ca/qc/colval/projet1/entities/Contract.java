@@ -1,27 +1,27 @@
 package ca.qc.colval.projet1.entities;
 
-public class Convention {
-    private int conventionId;
+public class Contract {
+    private int contractId;
     private String name;
 
     private int amount;
 
-    public Convention() {
+    public Contract() {
 
     }
 
-    public Convention(int conventionId, String name, int amount) {
-        this.conventionId = conventionId;
+    public Contract(int conventionId, String name, int amount) {
+        this.contractId = conventionId;
         this.name = name;
         this.amount = amount;
     }
 
-    public int getConventionId() {
-        return conventionId;
+    public int getContractId() {
+        return contractId;
     }
 
-    public void setConventionId(int conventionId) {
-        this.conventionId = conventionId;
+    public void setContractId(int contractId) {
+        this.contractId = contractId;
     }
 
     public String getName() {
@@ -32,7 +32,6 @@ public class Convention {
         this.name = name;
     }
 
-    //getters and setters for amount
     public int getAmount() {
         return amount;
     }
