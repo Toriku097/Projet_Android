@@ -47,7 +47,11 @@ public class ExpenseActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                addExpenseClick(v);
+                if(txt_amount.getText().toString().equals("")||txt_date.getText().toString().equals("")||txt_expenseType.getText().toString().equals("")){
+                    UtilityClass.Toast(getApplicationContext(),"Il faut remplir toutes les entrées de données");
+                }else {
+                    addExpenseClick(v);
+                }
             }
         });
     }

@@ -8,6 +8,7 @@
     tools:context=".activity.ConventionActivity">
 
     <LinearLayout
+        android:id="@+id/conv_linLayout"
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -74,4 +75,18 @@
             android:textColor="#3F51B5"
             android:textSize="12sp" />
     </LinearLayout>
+
+
+    <FrameLayout
+        android:layout_width="350dp"
+        android:layout_height="300dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/conv_linLayout">
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
