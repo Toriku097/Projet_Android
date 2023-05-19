@@ -13,14 +13,16 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import ca.qc.colval.projet1.R;
+import ca.qc.colval.projet1.api.CheckGetAPI;
 import ca.qc.colval.projet1.dao.CheckDAO;
 import ca.qc.colval.projet1.dao.ViewCheckAccountDAO;
+import ca.qc.colval.projet1.entities.Expense;
 import ca.qc.colval.projet1.entities.ViewCheckAccount;
 
-public class AccountActivity extends AppCompatActivity {
-
+public class AccountActivity extends AppCompatActivity implements CheckGetAPI.CommunicationChannel {
     TextView lbl_amount;
     Spinner spn_account,spn_check;
 
@@ -78,5 +80,10 @@ public class AccountActivity extends AppCompatActivity {
         Context context = getApplicationContext();
         Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
         toast.show();
+    }
+
+    @Override
+    public void loadData(List<Expense> expenses) {
+        List<String> arraySpinner = expenses.stream().filter(expense -> expense.getPaymentMethod() == "Chèque")
     }
 }

@@ -22,16 +22,17 @@ import ca.qc.colval.projet1.entities.Check;
 import ca.qc.colval.projet1.entities.Expense;
 
 public class CheckGetAPI implements Runnable {
-    String urlPath = "https://androidprojectdbcock-056f.restdb.io/rest/checks";
+    public interface CommunicationChannel{
+        void loadData(List<Expense> expenses);
+    }
+    CommunicationChannel channel;
+    String urlPath = "https://androidprojectdbcock-056f.restdb.io/rest/expenses";
     String key = "7faca29019492d112ff0d122f39b7cdd7b304";
     Activity activity;
-    RecyclerView recyclerView;
-    CheckAdapter adapter;
-    List<Check> checks;
 
-    public CheckGetAPI(Activity activity, RecyclerView recyclerView) {
+    public CheckGetAPI(Activity activity) {
         this.activity = activity;
-        this.recyclerView = recyclerView;
+        this.channel = (CommunicationChannel) activity;
     }
 
     @Override
@@ -64,14 +65,12 @@ public class CheckGetAPI implements Runnable {
                 Gson gson = new Gson();
                 Type listType = new TypeToken<ArrayList<Check>>(){}.getType();
 
-                checks = gson.fromJson(body, listType);
+                List<Expense> expenses = gson.fromJson(body, listType);
                 //when list of categories is ready
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        //update data source of MainActivity
-                        adapter = new CheckAdapter(checks, activity);
-                        recyclerView.setAdapter(adapter);
+                        channel.loadData(expenses);
                     }
                 });
 
