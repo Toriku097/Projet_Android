@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import ca.qc.colval.projet1.R;
@@ -26,25 +28,20 @@ public class AccountActivity extends AppCompatActivity implements CheckGetAPI.Co
     TextView lbl_amount;
     Spinner spn_account,spn_check;
 
-    ViewCheckAccountDAO viewCheckAccountDAO;
-    CheckDAO checkDAO;
-
-    List<ViewCheckAccount> infoList;
-    List<String> numList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
 
         //init
-        viewCheckAccountDAO = new ViewCheckAccountDAO(this);
-        checkDAO = new CheckDAO(this);
-
         lbl_amount = findViewById(R.id.account_lbl_amount);
         spn_account = findViewById(R.id.account_spn_account);
         spn_check = findViewById(R.id.account_spn_check);
 
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.execute(new CheckGetAPI(this));
+        service.shutdown();
+/*
         spn_account.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -66,14 +63,14 @@ public class AccountActivity extends AppCompatActivity implements CheckGetAPI.Co
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
-        });
+        });*/
     }
 
     public void payCheckClick (View v) {
         String id = spn_check.getSelectedItem().toString();
         showToast("1");
 
-        checkDAO.updateCheckbyId(Integer.parseInt(id));
+        //checkDAO.updateCheckbyId(Integer.parseInt(id));
         showToast("Payé");
     }
     private void showToast(String msg) {
@@ -84,6 +81,10 @@ public class AccountActivity extends AppCompatActivity implements CheckGetAPI.Co
 
     @Override
     public void loadData(List<Expense> expenses) {
-        List<String> arraySpinner = expenses.stream().filter(expense -> expense.getPaymentMethod() == "Chèque")
+        List<String> arraySpinner = expenses.stream().filter(expense -> expense.getPaymentMethod() == "Chèque").map(Expense::getExpenseType).collect(Collectors.toList());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_check.setAdapter(adapter);
     }
 }
