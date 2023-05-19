@@ -16,6 +16,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import ca.qc.colval.projet1.R;
+import ca.qc.colval.projet1.api.ExpenseRestAPI;
 import ca.qc.colval.projet1.dao.CheckDAO;
 import ca.qc.colval.projet1.dao.ExpenseDAO;
 import ca.qc.colval.projet1.entities.Check;
