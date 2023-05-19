@@ -1,6 +1,7 @@
 package ca.qc.colval.projet1.entities;
 
 public class Expense {
+    private String _id;
     private String expenseType;
     private double amount;
     private String paymentMethod;
@@ -14,6 +15,21 @@ public class Expense {
     }
 
     public Expense(String expenseType, double amount, String paymentMethod, String bankAccount, String supplier, String project, String date) {
+        this.expenseType = expenseType;
+        this.amount = amount;
+        this.paymentMethod = paymentMethod;
+        this.supplier = supplier;
+        this.project = project;
+        this.bankAccount = bankAccount;
+        this.date = date;
+        if (paymentMethod.equals("Chèque")){
+            isPaid = false;
+        } else {
+            isPaid = true;
+        }
+    }
+    public Expense(String _id,String expenseType, double amount, String paymentMethod, String bankAccount, String supplier, String project, String date) {
+        this._id = _id;
         this.expenseType = expenseType;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
@@ -86,5 +102,11 @@ public class Expense {
 
     public boolean isPaid() {
         return isPaid;
+    }
+    public void setPaid(){
+        this.isPaid = true;
+    }
+    public String getExpenseId(){
+        return _id;
     }
 }

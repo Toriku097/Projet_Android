@@ -44,8 +44,6 @@ public class ConventionActivity extends AppCompatActivity {
 
     //chart
     private BarChart chart;
-    private SeekBar seekBarX, seekBarY;
-    private TextView tvX, tvY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

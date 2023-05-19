@@ -1,5 +1,7 @@
 package ca.qc.colval.projet1.activity;
 
+import static java.util.stream.Collectors.toMap;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
@@ -15,7 +17,13 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.api.CheckGetAPI;
@@ -72,11 +80,12 @@ public class ChartActivity extends AppCompatActivity implements CheckGetAPI.Comm
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-        for (int i = 0; i < count ; i++) {
-            entries.add(new PieEntry((float) ((Math.random() * range) + range / 5),
-                    parties[i % parties.length],
-                    getResources().getDrawable(R.drawable.star)));
-        }
+//
+//        for (int i = 0; i < count ; i++) {
+//            entries.add(new PieEntry((float) ((Math.random() * range) + range / 5),
+//                    parties[i % parties.length],
+//                    getResources().getDrawable(R.drawable.star)));
+//        }
 
         PieDataSet dataSet = new PieDataSet(entries, "Dépenses par fournisseur ");
 
@@ -128,11 +137,17 @@ public class ChartActivity extends AppCompatActivity implements CheckGetAPI.Comm
     @Override
     public void loadData(List<Expense> expenses) {
         //Load data from API to pie chart
-        int pieCount = (int) expenses.stream().count();
-        float
+        int pieCount = (int) expenses.stream().distinct().count();
+        float pieRange = (float) expenses.stream().count();
+
         //setPieData();
 
         //Load data from API to horizontal bar chart
         //setHorizData();
+    }
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
+    {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
     }
 }
