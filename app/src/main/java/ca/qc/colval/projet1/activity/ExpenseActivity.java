@@ -12,6 +12,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.dao.CheckDAO;
@@ -22,8 +24,8 @@ import ca.qc.colval.projet1.utility.UtilityClass;
 
 public class ExpenseActivity extends AppCompatActivity {
 
-    TextView txt_amount,txt_expenseType,txt_date;
-    Spinner spn_project,spn_paymentMethod,spn_Account,spn_supplier;
+    TextView txt_amount, txt_expenseType, txt_date;
+    Spinner spn_project, spn_paymentMethod, spn_Account, spn_supplier;
 
     ExpenseDAO expenseDAO;
     CheckDAO checkDAO;
@@ -38,12 +40,20 @@ public class ExpenseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense);
 
         //init
-        try {expenses = expenseDAO.getAllExpenses();}
-        catch (java.lang.NullPointerException e){System.out.println(e);}
-        finally {expenses = new ArrayList<>();}
-        try {checks = checkDAO.getAllChecks();}
-        catch (java.lang.NullPointerException e){System.out.println(e);}
-        finally {checks = new ArrayList<>();}
+        try {
+            expenses = expenseDAO.getAllExpenses();
+        } catch (java.lang.NullPointerException e) {
+            System.out.println(e);
+        } finally {
+            expenses = new ArrayList<>();
+        }
+        try {
+            checks = checkDAO.getAllChecks();
+        } catch (java.lang.NullPointerException e) {
+            System.out.println(e);
+        } finally {
+            checks = new ArrayList<>();
+        }
 
         expenseDAO = new ExpenseDAO(this);
         checkDAO = new CheckDAO(this);
@@ -67,9 +77,9 @@ public class ExpenseActivity extends AppCompatActivity {
 
         //initialisation au retour
         expenses = expenseDAO.getAllExpenses();
-        expenseId = expenses.size()+1;
+        expenseId = expenses.size() + 1;
         checks = checkDAO.getAllChecks();
-        checkId = checks.size()+1;
+        checkId = checks.size() + 1;
     }
 
     public void addExpenseClick(View v) {
@@ -82,15 +92,14 @@ public class ExpenseActivity extends AppCompatActivity {
         String project = spn_project.getSelectedItem().toString();
         String date = txt_date.getText().toString();
         //initiate new temporary expense
-        Expense tempExpense = new Expense(expenseType,amount, payment,bank,supplier,project,date);
+        Expense tempExpense = new Expense(expenseType, amount, payment, bank, supplier, project, date);
         //post new expense to database
-
-
-
-        UtilityClass.Toast(this,"Dépense ajouté");
-
-
-        /*if(!expenses.isEmpty()) {
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.execute(new ExpenseRestAPI(this, tempExpense));
+    }
+}
+/*
+        if(!expenses.isEmpty()) {
             for (Expense expense : expenses) {
                 if (expense.getExpenseId() != expenseId) {
                     addExpense();
@@ -100,8 +109,8 @@ public class ExpenseActivity extends AppCompatActivity {
         } else {
             UtilityClass.Toast(this,"Premiere donnée ajouté");
             addExpense();
-        }*/
-    }/*
+        }
+    }
     private void addExpense(){
         Expense tempExpense;
         String expenseType = txt_expenseType.getText().toString();
@@ -158,5 +167,5 @@ public class ExpenseActivity extends AppCompatActivity {
             }
 
             return id;
-    }*/
-}
+    }
+}*/
