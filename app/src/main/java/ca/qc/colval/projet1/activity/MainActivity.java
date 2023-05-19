@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 
 import ca.qc.colval.projet1.R;
-import ca.qc.colval.projet1.entities.Convention;
 
 public class MainActivity extends AppCompatActivity {
 

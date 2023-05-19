@@ -26,11 +26,12 @@ public class ExpenseRestAPI implements Runnable{
             URL url;
             HttpURLConnection urlConnection = null;
             try {
-                url = new URL("https://jsonplaceholder.typicode.com/posts");
+                url = new URL(urlPath);
                 //open a URL connection
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
+                urlConnection.setRequestProperty("x-apikey",key);
                 urlConnection.setDoOutput(true);
                 String newPost = "{" +
                         "\"expense_type\": \""+expense.getExpenseType()+"\"," +

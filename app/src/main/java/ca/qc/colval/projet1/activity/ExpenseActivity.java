@@ -18,7 +18,6 @@ import java.util.concurrent.Executors;
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.api.ExpenseRestAPI;
 import ca.qc.colval.projet1.dao.CheckDAO;
-import ca.qc.colval.projet1.dao.ExpenseDAO;
 import ca.qc.colval.projet1.entities.Check;
 import ca.qc.colval.projet1.entities.Expense;
 import ca.qc.colval.projet1.utility.UtilityClass;
@@ -28,8 +27,6 @@ public class ExpenseActivity extends AppCompatActivity {
     TextView txt_amount, txt_expenseType, txt_date;
     Spinner spn_project, spn_paymentMethod, spn_Account, spn_supplier;
 
-    ExpenseDAO expenseDAO;
-    CheckDAO checkDAO;
     List<Expense> expenses;
     List<Check> checks;
     Random random;
@@ -41,6 +38,7 @@ public class ExpenseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense);
 
         //init
+        /*
         try {
             expenses = expenseDAO.getAllExpenses();
         } catch (java.lang.NullPointerException e) {
@@ -58,6 +56,7 @@ public class ExpenseActivity extends AppCompatActivity {
 
         expenseDAO = new ExpenseDAO(this);
         checkDAO = new CheckDAO(this);
+        */
 
         spn_supplier = findViewById(R.id.expense_spn_supplier);
         txt_amount = findViewById(R.id.depense_txt_money);
@@ -71,7 +70,7 @@ public class ExpenseActivity extends AppCompatActivity {
         expenseId = 1;
         checkId = 1;
     }
-
+/*
     @Override
     protected void onStart() {
         super.onStart();
@@ -81,7 +80,7 @@ public class ExpenseActivity extends AppCompatActivity {
         expenseId = expenses.size() + 1;
         checks = checkDAO.getAllChecks();
         checkId = checks.size() + 1;
-    }
+    }*/
 
     public void addExpenseClick(View v) {
         //link ui to variable
@@ -97,6 +96,7 @@ public class ExpenseActivity extends AppCompatActivity {
         //post new expense to database
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new ExpenseRestAPI(this, tempExpense));
+        service.shutdown();
     }
 }
 /*
