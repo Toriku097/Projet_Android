@@ -95,5 +95,26 @@
             android:textSize="16dp"
             android:backgroundTint="#FFC107"
             android:textColor="#3F51B5"/>
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Afficher les graphiques"
+            android:textAlignment="center"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="#3F51B5"/>
+
+        <Button
+            android:id="@+id/button15"
+            android:layout_width="200dp"
+            android:layout_height="50dp"
+            android:onClick="toChartClick"
+            android:text="Suivant"
+            android:textSize="16dp"
+            android:backgroundTint="#FFC107"
+            android:textColor="#3F51B5"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

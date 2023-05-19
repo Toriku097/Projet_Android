@@ -51,7 +51,7 @@ public class ContractPostAPI implements Runnable{
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            UtilityClass.Toast(context,"POST Success - " + newPost);
+                            UtilityClass.Toast(context,"Convention ajoutée");
                         }
                     });
                 }

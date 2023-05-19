@@ -34,4 +34,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, DeadlineActivity.class);
         startActivity(intent);
     }
+
+    public void toChartClick(View view) {
+        Intent intent = new Intent(this,ChartActivity.class);
+        startActivity(intent);
+    }
 }
