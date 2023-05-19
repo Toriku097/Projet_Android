@@ -82,4 +82,18 @@ public class Check {
     public int getIsPaid() {return isPaid;}
 
     public void setIsPaid(int isPaid) {isPaid = isPaid;}
+
+    @Override
+    public String toString() {
+        return "Check{" +
+                "checkId=" + checkId +
+                ", expenseId=" + expenseId +
+                ", checkNum=" + checkNum +
+                ", amount=" + amount +
+                ", accountId=" + accountId +
+                ", projectId=" + projectId +
+                ", deadlineDate='" + deadlineDate + '\'' +
+                ", isPaid=" + isPaid +
+                '}';
+    }
 }

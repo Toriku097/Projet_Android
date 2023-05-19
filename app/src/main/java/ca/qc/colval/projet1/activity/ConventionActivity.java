@@ -19,7 +19,8 @@ import ca.qc.colval.projet1.entities.SupplierConvention;
 
 public class ConventionActivity extends AppCompatActivity {
 
-    Spinner spn_supplier,spn_convention;
+    Spinner spn_supplier;
+    TextView txt_desc;
     SupplierConventionDAO DAO;
     List<SupplierConvention> list;
 
@@ -36,7 +37,7 @@ public class ConventionActivity extends AppCompatActivity {
         DAO = new SupplierConventionDAO(this);
 
         spn_supplier = findViewById(R.id.convention_spn_supplier);
-        spn_convention = findViewById(R.id.convention_spn_convention);
+        txt_desc = findViewById(R.id.convention_txt_desc);
     }
     public void addConventionClick(View v){
         int idCF = 1;
@@ -63,14 +64,7 @@ public class ConventionActivity extends AppCompatActivity {
     }
     private int[] bindId(){
         int[] id = new int[2];
-        switch (spn_convention.getSelectedItem().toString()){
-            case "Maconnerie":id[0]=1;
-            case "Plomberie":id[0]=2;
-            case "Electricite":id[0]=3;
-            case "Matériaux de construction":id[0]=4;
-            case "Système intelligent":id[0]=5;
-
-        }
+        id[0] = 1;
 
         switch (spn_supplier.getSelectedItem().toString()) {
             case "Buildmate":id[1]=1;

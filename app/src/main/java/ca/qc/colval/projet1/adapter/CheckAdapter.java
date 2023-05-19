@@ -13,6 +13,7 @@ import java.util.List;
 
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.entities.Check;
+import ca.qc.colval.projet1.utility.UtilityClass;
 
 public class CheckAdapter extends RecyclerView.Adapter<CheckViewHolder> {
 
@@ -33,7 +34,7 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CheckViewHolder holder, int position) {
-        holder.checkNum.setText(checks.get(position).getCheckNum());
+        holder.checkNum.setText(String.valueOf(checks.get(position).getCheckNum()));
         holder.amount.setText(String.valueOf(checks.get(position).getAmount()));
         holder.date.setText(checks.get(position).getDeadlineDate());
     }
