@@ -18,6 +18,7 @@ import ca.qc.colval.projet1.dao.CheckDAO;
 import ca.qc.colval.projet1.dao.ExpenseDAO;
 import ca.qc.colval.projet1.entities.Check;
 import ca.qc.colval.projet1.entities.Expense;
+import ca.qc.colval.projet1.utility.UtilityClass;
 
 public class ExpenseActivity extends AppCompatActivity {
 
@@ -72,7 +73,24 @@ public class ExpenseActivity extends AppCompatActivity {
     }
 
     public void addExpenseClick(View v) {
-        if(!expenses.isEmpty()) {
+        //link ui to variable
+        String expenseType = txt_expenseType.getText().toString();
+        Double amount = Double.parseDouble(txt_amount.getText().toString());
+        String payment = spn_paymentMethod.getSelectedItem().toString();
+        String bank = spn_Account.getSelectedItem().toString();
+        String supplier = spn_supplier.getSelectedItem().toString();
+        String project = spn_project.getSelectedItem().toString();
+        String date = txt_date.getText().toString();
+        //initiate new temporary expense
+        Expense tempExpense = new Expense(expenseType,amount, payment,bank,supplier,project,date);
+        //post new expense to database
+
+
+
+        UtilityClass.Toast(this,"Dépense ajouté");
+
+
+        /*if(!expenses.isEmpty()) {
             for (Expense expense : expenses) {
                 if (expense.getExpenseId() != expenseId) {
                     addExpense();
@@ -80,21 +98,21 @@ public class ExpenseActivity extends AppCompatActivity {
                 }
             }
         } else {
-            showToast("Premiere donnée ajouté");
+            UtilityClass.Toast(this,"Premiere donnée ajouté");
             addExpense();
-        }
-    }
+        }*/
+    }/*
     private void addExpense(){
         Expense tempExpense;
         String expenseType = txt_expenseType.getText().toString();
         Double amount = Double.parseDouble(txt_amount.getText().toString());
         String payment = spn_paymentMethod.getSelectedItem().toString();
-        int[] id = getId();
+        //int[] id = getId();
 
         tempExpense = new Expense(expenseId,expenseType,amount, payment,id[0], id[1], id[2]);
         expenseDAO.addExpense(tempExpense);
         expenses.add(tempExpense);
-        showToast("Dépense ajouté");
+        UtilityClass.Toast(this,"Dépense ajouté");
 
         expenseId++;
         if(payment.equals("Chèque")){
@@ -109,7 +127,7 @@ public class ExpenseActivity extends AppCompatActivity {
         Check tempCheck = new Check(checkId,expenseId, random.nextInt(666),amount,id[1],id[0],date,0);
         checkDAO.addCheck(tempCheck);
         checks.add(tempCheck);
-        showToast("Cheque ajouté");
+        UtilityClass.Toast(this,"Cheque ajouté");
 
         checkId++;
     }
@@ -140,10 +158,5 @@ public class ExpenseActivity extends AppCompatActivity {
             }
 
             return id;
-        }
-    private void showToast(String msg) {
-        Context context = getApplicationContext();
-        Toast toast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
-        toast.show();
-    }
+    }*/
 }
