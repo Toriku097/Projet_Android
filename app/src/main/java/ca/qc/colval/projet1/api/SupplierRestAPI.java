@@ -1,4 +1,4 @@
-package ca.qc.sol_td10.services;
+package ca.qc.colval.projet1.api;
 
 import android.app.Activity;
 import android.util.Log;
@@ -24,8 +24,8 @@ public class SupplierRestAPI implements Runnable {
     Activity activity;
     Supplier supplier;
 
-    String urlPath = "https://derbali-36d8.restdb.io/rest/suppliers";
-    String key = "232ec52be6fc72935ea68431ecf658ba36b5a";
+    String urlPath = "https://androidprojectdbcock-056f.restdb.io/rest/suppliers";
+    String key = "7faca29019492d112ff0d122f39b7cdd7b304";
     HttpURLConnection urlConnection = null;
 
     public SupplierRestAPI(Activity activity, Supplier supplier) {
