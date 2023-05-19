@@ -3,6 +3,8 @@ package ca.qc.colval.projet1.api;
 import android.content.Context;
 import android.util.Log;
 
+import com.google.gson.Gson;
+
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -33,15 +35,10 @@ public class ExpenseRestAPI implements Runnable{
                 urlConnection.setRequestProperty("Content-Type", "application/json");
                 urlConnection.setRequestProperty("x-apikey",key);
                 urlConnection.setDoOutput(true);
-                String newPost = "{" +
-                        "\"expense_type\": \""+expense.getExpenseType()+"\"," +
-                        "\"amount\": \""+expense.getAmount()+"\"," +
-                        "\"payment_method\": \""+expense.getPaymentMethod()+"\"," +
-                        "\"supplier\": \""+expense.getSupplier()+"\"," +
-                        "\"project\": \""+expense.getBankAccount()+"\"," +
-                        "\"bank_account\": \""+expense.getBankAccount()+"\"," +
-                        "\"date\": \""+expense.getDate()+"\"," +
-                        "}";
+
+                Gson gson = new Gson();
+                String newPost = gson.toJson(expense);
+
                 //send request
                 OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
                 wr.write(newPost);

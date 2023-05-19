@@ -8,6 +8,7 @@ public class Expense {
     private String supplier;
     private String project;
     private String date;
+    private boolean isPaid;
 
     public Expense() {
     }
@@ -16,10 +17,15 @@ public class Expense {
         this.expenseType = expenseType;
         this.amount = amount;
         this.paymentMethod = paymentMethod;
-        this.bankAccount = bankAccount;
         this.supplier = supplier;
         this.project = project;
+        this.bankAccount = bankAccount;
         this.date = date;
+        if (paymentMethod.equals("Chèque")){
+            isPaid = false;
+        } else {
+            isPaid = true;
+        }
     }
 
     public String getExpenseType() {

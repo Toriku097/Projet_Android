@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,11 +27,7 @@ public class ExpenseActivity extends AppCompatActivity {
 
     TextView txt_amount, txt_expenseType, txt_date;
     Spinner spn_project, spn_paymentMethod, spn_Account, spn_supplier;
-
-    List<Expense> expenses;
-    List<Check> checks;
-    Random random;
-    int expenseId, checkId;
+    Button btnAdd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,26 +35,6 @@ public class ExpenseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_expense);
 
         //init
-        /*
-        try {
-            expenses = expenseDAO.getAllExpenses();
-        } catch (java.lang.NullPointerException e) {
-            System.out.println(e);
-        } finally {
-            expenses = new ArrayList<>();
-        }
-        try {
-            checks = checkDAO.getAllChecks();
-        } catch (java.lang.NullPointerException e) {
-            System.out.println(e);
-        } finally {
-            checks = new ArrayList<>();
-        }
-
-        expenseDAO = new ExpenseDAO(this);
-        checkDAO = new CheckDAO(this);
-        */
-
         spn_supplier = findViewById(R.id.expense_spn_supplier);
         txt_amount = findViewById(R.id.depense_txt_money);
         txt_expenseType = findViewById(R.id.depense_txt_expenseType);
@@ -65,10 +42,14 @@ public class ExpenseActivity extends AppCompatActivity {
         spn_project = findViewById(R.id.depense_spn_project);
         spn_paymentMethod = findViewById(R.id.depense_spn_paymentMethod);
         spn_Account = findViewById(R.id.depense_spn_account);
+        btnAdd = findViewById(R.id.depense_btn_add);
 
-        random = new Random();
-        expenseId = 1;
-        checkId = 1;
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addExpenseClick(v);
+            }
+        });
     }
 /*
     @Override
@@ -92,7 +73,7 @@ public class ExpenseActivity extends AppCompatActivity {
         String project = spn_project.getSelectedItem().toString();
         String date = txt_date.getText().toString();
         //initiate new temporary expense
-        Expense tempExpense = new Expense(expenseType, amount, payment, bank, supplier, project, date);
+        Expense tempExpense = new Expense(expenseType, amount, payment, supplier, project, bank, date);
         //post new expense to database
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new ExpenseRestAPI(this, tempExpense));
