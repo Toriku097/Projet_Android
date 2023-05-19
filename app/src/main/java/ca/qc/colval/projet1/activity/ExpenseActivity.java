@@ -76,7 +76,7 @@ public class ExpenseActivity extends AppCompatActivity {
         Expense tempExpense = new Expense(expenseType, amount, payment, supplier, project, bank, date);
         //post new expense to database
         ExecutorService service = Executors.newSingleThreadExecutor();
-        service.execute(new ExpenseRestAPI(this, tempExpense));
+        service.execute(new ExpenseRestAPI(this, tempExpense,this));
         service.shutdown();
     }
 }

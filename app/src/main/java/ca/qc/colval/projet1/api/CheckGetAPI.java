@@ -63,7 +63,7 @@ public class CheckGetAPI implements Runnable {
                 Log.d("HTTP-GET", body);
                 //convert jsonBody to List<Categorie> in memory
                 Gson gson = new Gson();
-                Type listType = new TypeToken<ArrayList<Check>>(){}.getType();
+                Type listType = new TypeToken<ArrayList<Expense>>(){}.getType();
 
                 List<Expense> expenses = gson.fromJson(body, listType);
                 //when list of categories is ready

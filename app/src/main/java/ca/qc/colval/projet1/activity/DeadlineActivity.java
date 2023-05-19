@@ -12,19 +12,21 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.api.CheckGetAPI;
 import ca.qc.colval.projet1.dao.CheckDAO;
 import ca.qc.colval.projet1.entities.Check;
 import ca.qc.colval.projet1.adapter.CheckAdapter;
+import ca.qc.colval.projet1.entities.Expense;
 import ca.qc.colval.projet1.utility.UtilityClass;
 
-public class DeadlineActivity extends AppCompatActivity {
+public class DeadlineActivity extends AppCompatActivity implements CheckGetAPI.CommunicationChannel {
 
     RecyclerView rv;
     CheckAdapter adapter;
-    List<Check> checks;
+    List<Expense> expenses;
 
 
     @Override
@@ -36,21 +38,16 @@ public class DeadlineActivity extends AppCompatActivity {
         LinearLayoutManager manager = new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
 
-        checks = new ArrayList<>();
-        checks.add(new Check(1,1,101,50,1,1,"12/12/2012",0));
-
-        for (Check c : checks){
-            UtilityClass.Toast(this,c.toString());
-        }
-
-        adapter = new CheckAdapter(checks,this);
-        rv.setAdapter(adapter);
-
-
-
-//        ExecutorService service = Executors.newSingleThreadExecutor();
-//        service.execute(new CheckGetAPI(this,rv));
-//        service.shutdown();
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.execute(new CheckGetAPI(this));
+        service.shutdown();
     }
 
+    @Override
+    public void loadData(List<Expense> expenses) {
+        //changer le filtre pour ispaid
+        this.expenses = expenses.stream().filter(expense -> !expense.isPaid()).collect(Collectors.toList());
+        this.adapter = new CheckAdapter(this.expenses, this);
+        this.rv.setAdapter(this.adapter);
+    }
 }

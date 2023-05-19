@@ -1,72 +1,60 @@
 package ca.qc.colval.projet1.api;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import ca.qc.colval.projet1.entities.Supplier;
+import ca.qc.colval.projet1.entities.Contract;
+import ca.qc.colval.projet1.utility.UtilityClass;
 
-
-public class SupplierRestAPI implements Runnable {
-
-    public interface CommunicationChannel {
-        void sendResponseCode(int responseCode);
-    }
-
-    CommunicationChannel channel;
+public class ContractPostAPI implements Runnable{
+    String urlPath = "https://androidprojectdbcock-056f.restdb.io/rest/contracts";
+    String key= "7faca29019492d112ff0d122f39b7cdd7b304";
+    Contract contract;
     Activity activity;
-    Supplier supplier;
-
-    String urlPath = "https://androidprojectdbcock-056f.restdb.io/rest/suppliers";
-    String key = "7faca29019492d112ff0d122f39b7cdd7b304";
-    HttpURLConnection urlConnection = null;
-
-    public SupplierRestAPI(Activity activity, Supplier supplier) {
+    Context context;
+    public ContractPostAPI(Context context,Contract contract, Activity activity){
+        this.contract = contract;
+        this.context = context;
         this.activity = activity;
-        this.supplier = supplier;
-        channel = (CommunicationChannel) activity;
     }
-
     @Override
     public void run() {
         try {
             URL url;
+            HttpURLConnection urlConnection = null;
             try {
                 url = new URL(urlPath);
-                // Open a URL connection
+                //open a URL connection
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("POST");
                 urlConnection.setRequestProperty("Content-Type", "application/json");
-                urlConnection.setRequestProperty("x-apikey", key);
+                urlConnection.setRequestProperty("x-apikey",key);
                 urlConnection.setDoOutput(true);
 
-                // Use Gson library to convert the Supplier object to JSON
                 Gson gson = new Gson();
-                String supplierJson = gson.toJson(supplier);
+                String newPost = gson.toJson(contract);
 
-                // Send the request
+                //send request
                 OutputStreamWriter wr = new OutputStreamWriter(urlConnection.getOutputStream());
-                wr.write(supplierJson);
+                wr.write(newPost);
                 wr.flush();
-                if (urlConnection.getResponseCode() >= 200 && urlConnection.getResponseCode() < 300)
+                //check response code
+                if (urlConnection.getResponseCode()>=200 && urlConnection.getResponseCode()<300) {
+                    Log.d("HTTP-POST", "POST Success - " + newPost);
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            try {
-                                channel.sendResponseCode(urlConnection.getResponseCode());
-                            } catch (IOException e) {
-                                throw new RuntimeException(e);
-                            }
+                            UtilityClass.Toast(context,"POST Success - " + newPost);
                         }
                     });
-
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -78,6 +66,6 @@ public class SupplierRestAPI implements Runnable {
             e.printStackTrace();
             Log.d("Exception: ", e.getMessage());
         }
-
     }
 }
+

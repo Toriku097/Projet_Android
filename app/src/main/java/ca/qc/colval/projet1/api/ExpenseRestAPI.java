@@ -1,5 +1,6 @@
 package ca.qc.colval.projet1.api;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 
@@ -10,6 +11,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import ca.qc.colval.projet1.entities.Expense;
+import ca.qc.colval.projet1.utility.UtilityClass;
 
 public class ExpenseRestAPI implements Runnable{
     String urlPath = "https://androidprojectdbcock-056f.restdb.io/rest/expenses";
@@ -18,9 +20,11 @@ public class ExpenseRestAPI implements Runnable{
 
     Expense expense;
     Context context;
-    public ExpenseRestAPI(Context context,Expense expense){
+    Activity activity;
+    public ExpenseRestAPI(Context context,Expense expense,Activity activity){
         this.expense = expense;
         this.context = context;
+        this.activity = activity;
     }
     @Override
     public void run() {
@@ -44,8 +48,15 @@ public class ExpenseRestAPI implements Runnable{
                 wr.write(newPost);
                 wr.flush();
                 //check response code
-                if (urlConnection.getResponseCode()>=200 && urlConnection.getResponseCode()<300)
+                if (urlConnection.getResponseCode()>=200 && urlConnection.getResponseCode()<300) {
                     Log.d("HTTP-POST", "POST Success - " + newPost);
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            UtilityClass.Toast(context,"POST Success - " + newPost);
+                        }
+                    });
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

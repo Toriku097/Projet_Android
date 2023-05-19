@@ -13,15 +13,16 @@ import java.util.List;
 
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.entities.Check;
+import ca.qc.colval.projet1.entities.Expense;
 import ca.qc.colval.projet1.utility.UtilityClass;
 
 public class CheckAdapter extends RecyclerView.Adapter<CheckViewHolder> {
 
-    List<Check> checks;
+    List<Expense> expenses;
     Context context;
 
-    public CheckAdapter(List<Check> checks, Context context) {
-        this.checks = checks;
+    public CheckAdapter(List<Expense> checks, Context context) {
+        this.expenses = checks;
         this.context = context;
     }
     @NonNull
@@ -34,13 +35,13 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull CheckViewHolder holder, int position) {
-        holder.checkNum.setText(String.valueOf(checks.get(position).getCheckNum()));
-        holder.amount.setText(String.valueOf(checks.get(position).getAmount()));
-        holder.date.setText(checks.get(position).getDeadlineDate());
+        holder.checkNum.setText(expenses.get(position).getExpenseType());
+        holder.amount.setText(String.valueOf(expenses.get(position).getAmount()));
+        holder.date.setText(expenses.get(position).getDate());
     }
 
     @Override
     public int getItemCount() {
-        return checks.size();
+        return expenses.size();
     }
 }

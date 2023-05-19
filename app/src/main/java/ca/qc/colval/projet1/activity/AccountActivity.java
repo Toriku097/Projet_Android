@@ -41,29 +41,6 @@ public class AccountActivity extends AppCompatActivity implements CheckGetAPI.Co
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new CheckGetAPI(this));
         service.shutdown();
-/*
-        spn_account.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String newItem = spn_account.getSelectedItem().toString();
-
-                try {
-                    infoList = viewCheckAccountDAO.getCheckByAccount(newItem);
-                    numList = viewCheckAccountDAO.getCheckNumByAccount(newItem);
-                }
-                catch (java.lang.NullPointerException e) {
-                    infoList = new ArrayList<>();
-                    numList = new ArrayList<>();
-                    numList.add("Empty");
-                }
-
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(AccountActivity.this, android.R.layout.simple_spinner_dropdown_item,numList);
-                spn_check.setAdapter(adapter);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });*/
     }
 
     public void payCheckClick (View v) {
@@ -81,7 +58,7 @@ public class AccountActivity extends AppCompatActivity implements CheckGetAPI.Co
 
     @Override
     public void loadData(List<Expense> expenses) {
-        List<String> arraySpinner = expenses.stream().filter(expense -> expense.getPaymentMethod() == "Chèque").map(Expense::getExpenseType).collect(Collectors.toList());
+        List<String> arraySpinner = expenses.stream().filter(expense -> !expense.isPaid()).map(Expense::getExpenseType).collect(Collectors.toList());
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

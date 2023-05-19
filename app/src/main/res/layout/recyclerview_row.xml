@@ -6,49 +6,36 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/row_lbl_check"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:text="Numéro de chèque"
+            android:textColor="#2196F3"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/row_lbl_amount"
+            android:layout_width="90dp"
+            android:layout_height="wrap_content"
+            android:background="#C8C8C8"
+            android:text="Montant"
+            android:textColor="#009688"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/row_lbl_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/row_lbl_check"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:text="Numéro de chèque"
-                android:textColor="#2196F3"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/row_lbl_amount"
-                android:layout_width="90dp"
-                android:layout_height="wrap_content"
-                android:background="#C8C8C8"
-                android:text="Montant"
-                android:textColor="#009688"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/row_lbl_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:textColor="#F44336"
-                android:textSize="16sp" />
-        </LinearLayout>
-
+            android:text="Date"
+            android:textColor="#F44336"
+            android:textSize="16sp" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

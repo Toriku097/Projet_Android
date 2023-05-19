@@ -65,11 +65,11 @@
             android:inputType="numberDecimal" />
 
         <Button
-            android:id="@+id/button5"
+            android:id="@+id/convention_btn_add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#FFC107"
-            android:onClick="addConventionClick"
+            android:onClick="@{ (view) -> handler.showSectionSelectionDialog(view) }"
             android:text="Ajouter la convention"
             android:textColor="#3F51B5"
             android:textSize="12sp" />
