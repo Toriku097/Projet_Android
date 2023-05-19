@@ -1,7 +1,5 @@
 package ca.qc.colval.projet1.activity;
 
-import static java.util.stream.Collectors.toMap;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
@@ -17,12 +15,9 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
-import java.util.function.Predicate;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import ca.qc.colval.projet1.R;
@@ -41,6 +36,10 @@ public class ChartActivity extends AppCompatActivity implements CheckGetAPI.Comm
         //init
         chart1 = findViewById(R.id.chart_chart_supplier);
         chart2 = findViewById(R.id.chart_chart_mounth);
+
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.execute(new CheckGetAPI(this));
+        service.shutdown();
     }
 
     private void createPieChart(){
@@ -75,17 +74,16 @@ public class ChartActivity extends AppCompatActivity implements CheckGetAPI.Comm
         // add a selection listener
         //chart1.setOnChartValueSelectedListener(this);
     }
-    private void setPieData(int count, float range) {
+    /* private void setPieData(int count, float range) {
         ArrayList<PieEntry> entries = new ArrayList<>();
 
         // NOTE: The order of the entries when being added to the entries array determines their position around the center of
         // the chart.
-//
-//        for (int i = 0; i < count ; i++) {
-//            entries.add(new PieEntry((float) ((Math.random() * range) + range / 5),
-//                    parties[i % parties.length],
-//                    getResources().getDrawable(R.drawable.star)));
-//        }
+        /* for (int i = 0; i < count ; i++) {
+            entries.add(new PieEntry((float) ((Math.random() * range) + range / 5),
+                    entries[i % entries.length],
+                    getResources().getDrawable(R.drawable.star)));
+        }
 
         PieDataSet dataSet = new PieDataSet(entries, "Dépenses par fournisseur ");
 
@@ -130,24 +128,60 @@ public class ChartActivity extends AppCompatActivity implements CheckGetAPI.Comm
         chart1.highlightValues(null);
 
         chart1.invalidate();
+    } */
+    private void createHorizChart(){
+
     }
-    private void createHorizChart(){}
     private void setHorizData(){}
 
     @Override
-    public void loadData(List<Expense> expenses) {
+    /* public void loadData(List<Expense> expenses) {
         //Load data from API to pie chart
-        int pieCount = (int) expenses.stream().distinct().count();
-        float pieRange = (float) expenses.stream().count();
-
-        //setPieData();
+        int pieCount = (int) expenses.stream().count();
+        float pieRange = (float) expenses.stream().mapToDouble(Expense::getAmount).sum();
+        setPieData(pieCount, pieRange);
 
         //Load data from API to horizontal bar chart
         //setHorizData();
-    }
-    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
-    {
-        Map<Object, Boolean> map = new ConcurrentHashMap<>();
-        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    } */
+
+    public void loadData(List<Expense> expenses) {
+        // Filter expenses or perform any necessary data manipulation
+        List<Expense> filteredExpenses = expenses.stream().filter(expense -> !expense.isPaid()).collect(Collectors.toList());
+
+        // Create the entries for the PieChart
+        ArrayList<PieEntry> entries = new ArrayList<>();
+        for (Expense expense : filteredExpenses) {
+            float amount =(float) expense.getAmount();
+            String supplier = expense.getSupplier();
+
+            entries.add(new PieEntry(amount, supplier));
+        }
+
+        // Create a PieDataSet with the entries
+        PieDataSet dataSet = new PieDataSet(entries, "Dépenses par fournisseur");
+
+        // Customize the appearance of the PieDataSet
+        dataSet.setSliceSpace(3f);
+
+        // Set colors for the PieDataSet
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.BLUE);
+        colors.add(Color.GREEN);
+        // Add more colors if needed
+
+        dataSet.setColors(colors);
+
+        // Create a PieData object with the PieDataSet
+        PieData data = new PieData(dataSet);
+        data.setValueFormatter(new PercentFormatter());
+        data.setValueTextSize(11f);
+        data.setValueTextColor(Color.WHITE);
+
+        // Set the PieData to the PieChart
+        chart1.setData(data);
+
+        // Invalidate the PieChart to redraw it with the updated data
+        chart1.invalidate();
     }
 }
