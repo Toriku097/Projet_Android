@@ -1,5 +1,8 @@
 package ca.qc.colval.projet1.entities;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Expense {
     private String _id;
     private String expenseType;
@@ -43,6 +46,19 @@ public class Expense {
             isPaid = true;
         }
     }
+
+    //convert date to date object
+    public Date getDateObject(){
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        Date dateObject = null;
+        try {
+            dateObject = formatter.parse(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dateObject;
+    }
+
 
     public String getExpenseType() {
         return expenseType;

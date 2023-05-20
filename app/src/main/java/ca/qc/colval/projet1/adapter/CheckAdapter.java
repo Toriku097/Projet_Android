@@ -37,7 +37,7 @@ public class CheckAdapter extends RecyclerView.Adapter<CheckViewHolder> {
     public void onBindViewHolder(@NonNull CheckViewHolder holder, int position) {
         holder.checkNum.setText(expenses.get(position).getExpenseType());
         holder.amount.setText(String.valueOf(expenses.get(position).getAmount()));
-        holder.date.setText(expenses.get(position).getDate());
+        holder.date.setText(expenses.get(position).getDate().toString());
     }
 
     @Override
