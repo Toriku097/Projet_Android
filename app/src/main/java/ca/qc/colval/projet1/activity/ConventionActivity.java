@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -26,9 +27,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import ca.qc.colval.projet1.R;
+import ca.qc.colval.projet1.api.CheckGetAPI;
+import ca.qc.colval.projet1.api.ContractGetAPI;
 import ca.qc.colval.projet1.api.ContractPostAPI;
+import ca.qc.colval.projet1.api.ContractRestAPI;
 import ca.qc.colval.projet1.api.ExpenseRestAPI;
 import ca.qc.colval.projet1.dao.SupplierConventionDAO;
 import ca.qc.colval.projet1.entities.Contract;
@@ -36,15 +41,13 @@ import ca.qc.colval.projet1.entities.Expense;
 import ca.qc.colval.projet1.entities.SupplierConvention;
 import ca.qc.colval.projet1.utility.UtilityClass;
 
-public class ConventionActivity extends AppCompatActivity {
+public class ConventionActivity extends AppCompatActivity implements ContractGetAPI.CommunicationChannel, AdapterView.OnItemSelectedListener {
 
-    Spinner spn_supplier;
-    TextView txt_desc,txt_amount;
-    Button btn_add;
-
-    //chart
-    private BarChart chart;
-
+    Spinner spn_supplier, spn_delete;
+    TextView txt_desc, txt_amount, txt_delete;
+    Button btn_add, btn_delete;
+    List<Contract> contracts;
+    Contract selected;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,100 +58,71 @@ public class ConventionActivity extends AppCompatActivity {
         txt_desc = findViewById(R.id.convention_txt_desc);
         txt_amount = findViewById(R.id.convention_txt_amount);
         btn_add = findViewById(R.id.convention_btn_add);
-        chart = findViewById(R.id.chart1);
+        btn_delete = findViewById(R.id.delete_btn_delete);
+        spn_delete = findViewById(R.id.delete_spn_supplier);
+        txt_delete = findViewById(R.id.delete_lbl_why);
 
-        createChart();
-        //remplir le graphique avec les convention/contrat
-        setData(5, 100);
+        ExecutorService service = Executors.newSingleThreadExecutor();
+        service.execute(new ContractGetAPI(this));
+        service.shutdown();
+
 
         btn_add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(txt_desc.getText().toString().equals("")||txt_amount.getText().toString().equals("")){
-                    UtilityClass.Toast(getApplicationContext(),"Il faut remplir toutes les entrées de données");
+                if (txt_desc.getText().toString().equals("") || txt_amount.getText().toString().equals("")) {
+                    UtilityClass.Toast(getApplicationContext(), "Il faut remplir toutes les entrées de données");
                 } else {
                     addConventionClick(v);
                 }
             }
         });
+
+        //spn_delete.setOnItemSelectedListener(this);
+        btn_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteContract(v);
+            }
+        });
     }
+
     public void addConventionClick(View v) {
         //link ui to variable
         String desc = txt_desc.getText().toString();
         String supplier = spn_supplier.getSelectedItem().toString();
         double amount = Double.parseDouble(txt_amount.getText().toString());
         //initiate new temporary expense
-        Contract tempContract = new Contract(desc,supplier,amount);
+        Contract tempContract = new Contract(desc, supplier, amount);
         //post new expense to database
         ExecutorService service = Executors.newSingleThreadExecutor();
-        service.execute(new ContractPostAPI(this, tempContract,this));
+        service.execute(new ContractPostAPI(this, tempContract, this));
         service.shutdown();
     }
-    public void createChart(){
-        chart.setDrawBarShadow(false);
-        chart.setDrawValueAboveBar(true);
-        chart.getDescription().setEnabled(false);
-        // if more than 60 entries are displayed in the chart, no values will be
-        // drawn
-        chart.setMaxVisibleValueCount(60);
-        // scaling can now only be done on x- and y-axis separately
-        chart.setPinchZoom(false);
-        chart.setDrawGridBackground(false);
-        Legend l = chart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setForm(Legend.LegendForm.SQUARE);
-        l.setFormSize(9f);
-        l.setTextSize(11f);
-        l.setXEntrySpace(4f);
+
+    public void deleteContract(View v){
+        ContractRestAPI contractRestAPI = new ContractRestAPI();
+        contractRestAPI.deleteContract(selected.get_id());
     }
-    @SuppressLint("UseCompatLoadingForDrawables")
-    private void setData(int count, float range) {
-        float start = 1f;
-        ArrayList<BarEntry> values = new ArrayList<>();
-        for (int i = (int) start; i < start + count; i++) {
-            float val = (float) (Math.random() * (range + 1));
-            if (Math.random() * 100 < 25) {
-                values.add(new BarEntry(i, val, getResources().getDrawable(com.google.android.material.R.drawable.abc_star_black_48dp)));
-            } else {
-                values.add(new BarEntry(i, val));
-            }
-        }
-        BarDataSet set1;
-        if (chart.getData() != null &&
-                chart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) chart.getData().getDataSetByIndex(0);
-            set1.setValues(values);
-            chart.getData().notifyDataChanged();
-            chart.notifyDataSetChanged();
-        } else {
-            set1 = new BarDataSet(values, "The year 2017");
-            set1.setDrawIcons(false);
-            int startColor1 = ContextCompat.getColor(this, android.R.color.holo_orange_light);
-            int startColor2 = ContextCompat.getColor(this, android.R.color.holo_blue_light);
-            int startColor3 = ContextCompat.getColor(this, android.R.color.holo_orange_light);
-            int startColor4 = ContextCompat.getColor(this, android.R.color.holo_green_light);
-            int startColor5 = ContextCompat.getColor(this, android.R.color.holo_red_light);
-            int endColor1 = ContextCompat.getColor(this, android.R.color.holo_blue_dark);
-            int endColor2 = ContextCompat.getColor(this, android.R.color.holo_purple);
-            int endColor3 = ContextCompat.getColor(this, android.R.color.holo_green_dark);
-            int endColor4 = ContextCompat.getColor(this, android.R.color.holo_red_dark);
-            int endColor5 = ContextCompat.getColor(this, android.R.color.holo_orange_dark);
-            List<GradientColor> gradientFills = new ArrayList<>();
-            gradientFills.add(new GradientColor(startColor1, endColor1));
-            gradientFills.add(new GradientColor(startColor2, endColor2));
-            gradientFills.add(new GradientColor(startColor3, endColor3));
-            gradientFills.add(new GradientColor(startColor4, endColor4));
-            gradientFills.add(new GradientColor(startColor5, endColor5));
-            set1.setGradientColors(gradientFills);
-            ArrayList<IBarDataSet> dataSets = new ArrayList<>();
-            dataSets.add(set1);
-            BarData data = new BarData(dataSets);
-            data.setValueTextSize(10f);
-            data.setBarWidth(0.9f);
-            chart.setData(data);
-        }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selected = contracts.stream().filter(contract -> contract.getSupplier() == spn_delete.getSelectedItem().toString()).findFirst().get();
+        txt_delete.setText(String.valueOf(selected.getSupplier()));
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
+
+    @Override
+    public void loadData(List<Contract> contracts) {
+        this.contracts = contracts;
+        List<String> arraySpinner = contracts.stream().map(Contract::getDesc).collect(Collectors.toList());
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
+                androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,arraySpinner);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn_delete.setAdapter(adapter);
     }
 }
