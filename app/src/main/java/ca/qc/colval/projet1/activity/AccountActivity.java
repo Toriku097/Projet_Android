@@ -82,17 +82,6 @@ public class AccountActivity extends AppCompatActivity implements CheckGetAPI.Co
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn_check.setAdapter(adapter);
     }
-    public static <T> Collector<T, ?, T> toSingleton() {
-        return Collectors.collectingAndThen(
-                Collectors.toList(),
-                list -> {
-                    if (list.size() != 1) {
-                        throw new IllegalStateException();
-                    }
-                    return list.get(0);
-                }
-        );
-    }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
