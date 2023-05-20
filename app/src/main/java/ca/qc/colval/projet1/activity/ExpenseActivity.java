@@ -10,11 +10,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import ca.qc.colval.projet1.R;
 import ca.qc.colval.projet1.api.ExpenseRestAPI;
@@ -50,7 +53,11 @@ public class ExpenseActivity extends AppCompatActivity {
                 if(txt_amount.getText().toString().equals("")||txt_date.getText().toString().equals("")||txt_expenseType.getText().toString().equals("")){
                     UtilityClass.Toast(getApplicationContext(),"Il faut remplir toutes les entrées de données");
                 }else {
-                    addExpenseClick(v);
+                    try {
+                        addExpenseClick(v);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
         });
@@ -67,7 +74,7 @@ public class ExpenseActivity extends AppCompatActivity {
         checkId = checks.size() + 1;
     }*/
 
-    public void addExpenseClick(View v) {
+    public void addExpenseClick(View v) throws ParseException {
         //link ui to variable
         String expenseType = txt_expenseType.getText().toString();
         Double amount = Double.parseDouble(txt_amount.getText().toString());
@@ -75,13 +82,15 @@ public class ExpenseActivity extends AppCompatActivity {
         String bank = spn_Account.getSelectedItem().toString();
         String supplier = spn_supplier.getSelectedItem().toString();
         String project = spn_project.getSelectedItem().toString();
-        String date = txt_date.getText().toString();
+        String date= txt_date.getText().toString();
+
         //initiate new temporary expense
         Expense tempExpense = new Expense(expenseType, amount, payment, supplier, project, bank, date);
         //post new expense to database
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new ExpenseRestAPI(this, tempExpense,this));
         service.shutdown();
+        UtilityClass.Toast(this, "Dépense ajouté");
     }
 }
 /*

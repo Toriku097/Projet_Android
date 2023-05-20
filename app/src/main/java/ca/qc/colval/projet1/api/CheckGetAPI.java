@@ -51,7 +51,7 @@ public class CheckGetAPI implements Runnable {
                 InputStream in = urlConnection.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
                 // use a string builder to bufferize the response body
-                // read from the input strea.
+                // read from the input stream
                 StringBuilder sb = new StringBuilder();
                 String line;
                 while ((line = br.readLine()) != null) {
