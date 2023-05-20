@@ -10,6 +10,8 @@ public class ContractRestAPI {
     private static final String URL_PATH = "https://androidprojectdbcock-056f.restdb.io/rest/expenses";
     String key = "7faca29019492d112ff0d122f39b7cdd7b304";
 
+    public ContractRestAPI(){}
+
     public void deleteContract(String contractId) {
         try {
             URL url = new URL(URL_PATH + "/" + contractId);

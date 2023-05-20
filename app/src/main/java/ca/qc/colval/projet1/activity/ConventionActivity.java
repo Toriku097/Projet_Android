@@ -77,7 +77,7 @@ public class ConventionActivity extends AppCompatActivity implements ContractGet
                 }
             }
         });
-
+        //pas activer car fait planter l'activité
         //spn_delete.setOnItemSelectedListener(this);
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,7 +100,7 @@ public class ConventionActivity extends AppCompatActivity implements ContractGet
         service.shutdown();
     }
 
-    public void deleteContract(View v){
+    public void deleteContract(View v){ // l'id de la convention ne se remplie pas
         ContractRestAPI contractRestAPI = new ContractRestAPI();
         contractRestAPI.deleteContract(selected.get_id());
     }
